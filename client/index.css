@@ -1,0 +1,25 @@
+nav{
+    display: flex;
+    justify-content: flex-end;
+}
+
+nav a{
+    padding:5px 10px;
+    font-size: 18px;
+    cursor: pointer;
+    margin:0px 5px;
+    text-decoration: none;
+}
+
+.wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    font-size: 24px;
+}
+
+.wrapper h1{
+    margin-bottom: 0px;
+}

@@ -1,0 +1,165 @@
+#myGrid {
+    display: grid;
+    grid-template-columns: 2fr 8fr 2fr;
+    grid-template-rows: auto auto 2fr;
+    grid-template-areas: '#chooser #display #calculate'
+}
+
+#England,
+#Spain,
+#Germany,
+#Italy {
+    width: 15em;
+    height: 1.2em;
+    border: 1px solid black;
+    background-color: royalblue;
+    color: white;
+    border-radius: 2px;
+    text-align: left;
+    font-family: cursive;
+    font-size: 0.9em;
+    font-weight: bold;
+    padding-left: 26px;
+    padding-bottom: 24px;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+#England div,
+#Spain div,
+#Germany div,
+#Italy div {
+    width: 7em;
+    height: 1.2em;
+    border: inherit;
+    display: none;
+    user-select: none;
+}
+
+div {
+    user-select: none;
+}
+
+#eplDisplay {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: 'div div div div';
+    justify-items: space-evenly;
+    border: 1px solid grey;
+    height: 205px;
+    grid-gap: 1px;
+    width: 84.5%;
+    margin: 0px 30px;
+}
+
+.style_divs {
+    border: 1px solid black;
+    background-color: royalblue;
+    color: white;
+    border-radius: 2px;
+    text-align: center;
+    padding-top: 11px;
+    font-family: cursive;
+    font-size: 0.9em;
+    font-weight: bold;
+    height: 50px;
+    width: 188px;
+    box-sizing: border-box;
+}
+
+.vals {
+    border: 1px solid black;
+    background-color: rgb(3, 38, 143);
+    color: white;
+    border-radius: 2px;
+    text-align: center;
+    padding-top: 11px;
+    font-family: cursive;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin: 5px;
+    height: 35px;
+    width: 35px;
+    box-sizing: border-box;
+}
+
+.matchSpan {
+    border: 1px solid black;
+    background-color: rgb(12, 56, 189);
+    color: white;
+    border-radius: 2px;
+    text-align: left;
+    padding-top: 11px;
+    font-family: cursive;
+    font-size: 0.9em;
+    font-weight: bold;
+    height: 35px;
+    width: 200px;
+    box-sizing: border-box;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.subDiv {
+    border: 1px solid black;
+    display: grid;
+    grid-template-columns: 6fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: '.matchSpan .vals .vals .vals .vals .vals .vals';
+    width: 85%;
+    box-sizing: border-box;
+    margin: 5px 30px;
+}
+
+.subDivMini {
+    border: 1px solid black;
+    display: grid;
+    grid-template-columns: 6fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: '.matchSpan '' '' '' '' .vals .vals';
+    width: 85%;
+    box-sizing: border-box;
+    margin: 5px 30px;
+}
+
+.match {
+    background-color: cornflowerblue;
+    color: black;
+    border-radius: 2px;
+    text-align: left;
+    padding-top: 11px;
+    font-family: cursive;
+    font-size: 0.9em;
+    font-weight: bold;
+    height: 35px;
+    width: 200px;
+    box-sizing: border-box;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.options {
+    background-color: cornflowerblue;
+    color: black;
+    border-radius: 2px;
+    text-align: center;
+    padding-top: 11px;
+    font-family: cursive;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin: 5px;
+    height: 35px;
+    width: 35px;
+    box-sizing: border-box;
+}
+
+#calculate {
+    border: 1px solid black;
+    box-sizing: border-box;
+    width: 12.5em;
+}
+
+#chooser {
+    margin-left: 15px;
+}
