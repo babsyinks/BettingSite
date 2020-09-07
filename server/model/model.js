@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const individualLeaguesSchema = new mongoose.Schema({
-    league:{teams:[{
+            teams:[{
                     team:String,
                     rating:Number
                 }],
@@ -11,7 +11,7 @@ const individualLeaguesSchema = new mongoose.Schema({
                     cornerOver8pt5: Number,cornerUnder8pt5: Number,cornerOver11pt5: Number,cornerUnder11pt5: Number,gg: Number,ng: Number
                 }]
 
-}})
+})
 
 const leaguesSchema = new mongoose.Schema({
     leagues:[individualLeaguesSchema]

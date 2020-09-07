@@ -5,5 +5,5 @@ conn.then(()=>{
     console.log('Connected successfully to bettingSiteDB successfully')
 })
 .catch((err)=>{
-    console.log('Connection failed with error: ', err.message)
+    console.log('Connection failed with error: ', err.message) 
 })
