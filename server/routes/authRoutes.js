@@ -3,7 +3,9 @@ const path = require('path')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const mongoose = require('mongoose')
+require('dotenv').config({path:path.join('..','..','.env')});
 
+require('dotenv').config({ debug: process.env.DEBUG })
 const ENGLISH_LEAGUES = require('../data/england')
 const SPANISH_LEAGUES = require('../data/spain')
 const ITALIAN_LEAGUES = require('../data/italy')
@@ -13,9 +15,9 @@ const BET_TYPE_WITH_ODDS = require('../data/data')
 const {User,Country} = require('../model/model')
 const createEachLeague = require('../utilityFunctions/individualLeaguesRunner')
 
-const Router = express.Router()
+const Router = express.Router() 
 
-Router.use(express.json())
+Router.use(express.json()) 
 
 Router.get('/signUp',(req,res)=>{
     res.sendFile(path.resolve('client','signUp.html'))
@@ -44,7 +46,8 @@ Router.post('/signUp', async(req,res)=>{
  const newUser = new User(user)
 
  await newUser.save()
- const token = jwt.sign({user:{id:newUser.id}},'sdahufdfbdfbwldb',{expiresIn:24*60*60})
+ 
+ const token = jwt.sign({user:{id:newUser.id}},process.env.TOKEN_SECRET,{expiresIn:24*60*60})
 
     res.cookie('token',token,{httpOnly:true,expires:new Date(Date.now() + 24*60*60)})
     
@@ -69,7 +72,7 @@ Router.post('/signIn',async (req,res)=>{
        return  res.status(400).send({message:'Invalid Credentials'})
     }
 
-    const token = jwt.sign({user:{id:user.id}},'sdahufdfbdfbwldb',{expiresIn:24*60*60})
+    const token = jwt.sign({user:{id:user.id}},process.env.TOKEN_SECRET,{expiresIn:24*60*60})
     res.cookie('token',token,{httpOnly:true,expires:new Date(Date.now() + 24*60*60)})
     res.json({token})
     } catch (error) {

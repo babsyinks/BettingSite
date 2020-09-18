@@ -5,6 +5,7 @@ const app = express()
 const accessRoutes = require('./server/routes/authRoutes')
 const betRoutes = require('./server/routes/betRoutes')
 const generalRoutes = require('./server/routes/generalRoutes')
+const displayBetsRoutes = require('./server/routes/displayBetsRoutes')
 require('./server/db/db')
 
 app.set('view engine','ejs')
@@ -13,6 +14,7 @@ app.use(express.static(path.resolve(__dirname,'client')))
 
 app.use('/access',accessRoutes)
 app.use('/bets',betRoutes)
+app.use('/display',displayBetsRoutes)
 app.use(generalRoutes)
 
 app.listen(3000,()=>{
