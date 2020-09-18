@@ -1,0 +1,2 @@
+export const arr_ids = ['main', 'gg_ng', 'ou1p5', 'ou2p5', 'ou3p5', 'ou4p5', 'redCard', 'penalty', 'conerou8p5', 'conerou11p5', 'winEither', 'winBoth', 'ou1p5Home', 'ou1p5Away', 'ou0p5Home', 'ou0p5Away']
+export const arr_vals = ['MAIN', 'GG/NG', 'O/U 1.5', 'O/U 2.5', 'O/U 3.5', 'O/U 4.5', 'RED CARD', 'PENALTY', 'CORNER O/U 8.5', 'CORNER O/U 11.5', 'WIN EITHER', 'WIN BOTH', 'O/U 1.5 HOME', 'O/U 1.5 AWAY', 'O/U 0.5 HOME', 'O/U 0.5 AWAY']
