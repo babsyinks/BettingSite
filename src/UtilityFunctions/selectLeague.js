@@ -75,26 +75,26 @@ export default function(country,league){
         case 'Germany':
             switch(league){
                 case '1.bundesliga':
-                    selectLeague(league,country)
+                    selectLeagueRunner(league,country)
                     break
                 case '2.bundesliga':
-                    selectLeague(league,country)
+                    selectLeagueRunner(league,country)
                     break
                 case '3.liga':
-                    selectLeague(league,country)
+                    selectLeagueRunner(league,country)
                     break
             }
             break
         case 'Italy':
             switch(league){
                 case 'seriea':
-                    selectLeague(league,country)
+                    selectLeagueRunner(league,country)
                     break
                 case 'serieb':
-                    selectLeague(league,country)
+                    selectLeagueRunner(league,country)
                     break
                 case 'seriec':
-                    selectLeague(league,country)
+                    selectLeagueRunner(league,country)
                     break
             }
             break
