@@ -31,10 +31,16 @@ const processMatch = (matchObj,countryArr)=>{
     for (const key in matchObj) {
        let parsedVal = parseFloat(matchObj[key])
        if(!Number.isNaN(parsedVal)){
-            matchObject[key] = parsedVal
+            matchObject[key] = matchObj[key]
        }
        else{
-           matchObject[key] = matchObj[key]
+           if(key === "homeTeam"||key === "awayTeam"){
+               matchObject[key] = matchObj[key]
+           }
+           else{
+               matchObject[key] = "1.50"
+           }
+           
        }
     }
     const isExistingTeam = processCountry(country,countryArr,matchObject,league,checkAndPushToArray)

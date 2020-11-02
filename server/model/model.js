@@ -5,10 +5,10 @@ const individualLeaguesSchema = new mongoose.Schema({
                     team:String,
                     rating:Number
                 }],
-            games:[{homeTeam:String,awayTeam:String,one:Number,x:Number,two:Number,oneX:Number,oneTwo:Number,xTwo:Number,
-                    over2pt5:Number,under2pt5:Number,over1pt5:Number,under1pt5:Number,over3pt5:Number,under3pt5:Number,
-                    over4pt5:Number,under4pt5:Number,redcardYes:Number,redcardNo:Number,penaltyYes:Number,penaltyNo:Number,
-                    cornerOver8pt5: Number,cornerUnder8pt5: Number,cornerOver11pt5: Number,cornerUnder11pt5: Number,gg: Number,ng: Number
+            games:[{homeTeam:String,awayTeam:String,one:String,x:String,two:String,oneX:String,oneTwo:String,xTwo:String,
+                    over2pt5:String,under2pt5:String,over1pt5:String,under1pt5:String,over3pt5:String,under3pt5:String,
+                    over4pt5:String,under4pt5:String,redcardYes:String,redcardNo:String,penaltyYes:String,penaltyNo:String,
+                    cornerOver8pt5: String,cornerUnder8pt5: String,cornerOver11pt5: String,cornerUnder11pt5: String,gg: String,ng: String
                 }]
 
 })
