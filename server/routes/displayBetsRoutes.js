@@ -12,11 +12,12 @@ Router.get('/placeBets',auth,(req,res)=>{
     res.json({message:'Welcome'})
     })
 
-Router.post('/matches',auth,async(req,res)=>{
+Router.post('/matches',auth,async(req,res)=>{ 
 const{country,league} = req.body
 const user = await User.findById(req.user.id)
 const allCountries = user.allLeagues.countries
 const matchesWithOdds = fetchMatchesWithOdds(country,league,allCountries)
+res.json(matchesWithOdds) 
 })
 
 module.exports = Router

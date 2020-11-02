@@ -202,7 +202,7 @@ const editGame = async()=>{
         if (Number.isNaN(numVal) || numVal === 0 || Math.sign(numVal) !== 1 || numVal <= 1||numVal>=100) {
           throw new Error('Invalid odd.Only positive numbers above one and less than 100 are allowed')
         }
-      matchObj[textNodes[i].name] = numVal
+      matchObj[textNodes[i].name] = numVal.toFixed(2)
       }
       const matchObject = {...matchObj,...gameToEdit}
     
@@ -566,13 +566,19 @@ function closureOnData() {
       let vals = []
 
       for (let v of nodes) {
-        if (/^0+/.test(`${v.value}`)) {
+/*         if (/^0+/.test(v.value)) {
           v.value = parseInt(`${v.value}`, 10)
+          v.value = `${v.value}`
         }
-
-        vals.push(v.value)
+ */
+        vals.push(parseFloat(v.value).toFixed(2))
+        
+      }
+/*       if (/^0+/.test(`${v.value}`)) {
+        v.value = parseInt(`${v.value}`, 10)
       }
 
+      vals.push(parseFloat(v.value).toFixed(2)) */
       return vals
     }
 

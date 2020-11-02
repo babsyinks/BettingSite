@@ -1,4 +1,4 @@
-const{
+const {
     ggParamsObj,
     ou1p5ParamsObj,
     ou2p5ParamsObj,
@@ -11,8 +11,8 @@ const{
     conerou8p5ParamsObj,
     conerou11p5ParamsObj
 } = require('../data/oddsData')
-//  main,gg,ou1p5,ou2p5,ou3p5,ou4p5,redCard,penalty,conerou8p5,conerou11p5,winEither,winBoth,ou1p5Home,ou1p5Away,ou0p5Home,ou0p5Away          
-const winDecider = (ratingsDifference,homerating,awayrating)=>{
+      
+const calculateOdds = (ratingsDifference,homerating,awayrating)=>{
 
     const getRandomDecimal = ()=>{
         return (Math.floor(Math.random()*100))/100
@@ -21,6 +21,9 @@ const winDecider = (ratingsDifference,homerating,awayrating)=>{
     const getDecimalVal = (decimalNum,greater)=>{
         let dec = decimalNum
         //home team
+        if(ratingsDifference<=-3){
+            greater = !greater
+        }
         if(greater){
             if(decimalNum>0.50){
               dec = decimalNum-=0.50
@@ -50,7 +53,7 @@ const winDecider = (ratingsDifference,homerating,awayrating)=>{
 
     }
     
-    const getMainOdds = (homeWholeNum,awayWholeNum,drawWholeNum,doubleChanceWholeNum)=>{
+    const getMainOdds = (homeWholeNum,awayWholeNum,drawWholeNum,doubleChanceWholeNumHome,doubleChanceWholeNumAway,doubleChanceWholeNumBoth)=>{
 
         let decimal
         let wholeNumber
@@ -58,40 +61,42 @@ const winDecider = (ratingsDifference,homerating,awayrating)=>{
         wholeNumber = homeWholeNum
         decimal = getRandomDecimal()
         decimal = getDecimalVal(decimal,true)
-        oddsObj.one = wholeNumber + decimal
+        oddsObj.one = (wholeNumber + decimal).toFixed(2)
 
         wholeNumber = awayWholeNum
         decimal = getRandomDecimal()
         decimal = getDecimalVal(decimal,false)
-        oddsObj.two = wholeNumber + decimal
+        oddsObj.two = (wholeNumber + decimal).toFixed(2)
 
         wholeNumber = drawWholeNum
         decimal = getRandomDecimal()
         decimal = getDecimalVal(decimal,randomBool())
-        oddsObj.x = wholeNumber + decimal
+        oddsObj.x = (wholeNumber + decimal).toFixed(2)
 
-        wholeNumber = doubleChanceWholeNum 
+        wholeNumber = doubleChanceWholeNumHome 
         decimal = getRandomDecimal()
         decimal = getDecimalVal(decimal,true)
-        oddsObj.onex = wholeNumber + decimal
+        oddsObj.onex = (wholeNumber + decimal).toFixed(2)
 
+        wholeNumber = doubleChanceWholeNumAway 
         decimal = getRandomDecimal()
         decimal = getDecimalVal(decimal,false)
-        oddsObj.xtwo = wholeNumber + decimal
+        oddsObj.xtwo = (wholeNumber + decimal).toFixed(2)
 
+        wholeNumber = doubleChanceWholeNumBoth
         decimal = getRandomDecimal()
         decimal = getDecimalVal(decimal,randomBool())
-        oddsObj.onetwo = wholeNumber + decimal
+        oddsObj.onetwo = (wholeNumber + decimal).toFixed(2)
 
         return oddsObj
     }
 
     const setOverUnderOdds = (highGoalsWholeNum,highGoalsArr,lowGoalsWholeNum,lowGoalsArr,oddsObject,isGGNG)=>{
         let decimal = getDecimalForGoals(highGoalsArr)
-        let highGoalsOdds = highGoalsWholeNum + decimal
+        let highGoalsOdds = (highGoalsWholeNum + decimal).toFixed(2)
 
         decimal = getDecimalForGoals(lowGoalsArr)
-        let lowGoalsOdds = lowGoalsWholeNum + decimal
+        let lowGoalsOdds = (lowGoalsWholeNum + decimal).toFixed(2)
         if(isGGNG){
         oddsObject.gg = highGoalsOdds
         oddsObject.ng = lowGoalsOdds
@@ -102,41 +107,42 @@ const winDecider = (ratingsDifference,homerating,awayrating)=>{
         }
 
     }
-
+    //keys zero,one,two,etc of paramsObj maps to how getOverUnderOdds function determines what conditional to run
+    //hg-highgoals, hga-highgoalsarray, lg-lowgoals, lga-lowgoalsarray
     const getOverUnderOdds = (hmRating,awRating,oddsObj,paramsObj,isGGNG)=>{
         
         if(hmRating>0 && awRating>0){
             setOverUnderOdds(paramsObj.zero.hg,paramsObj.zero.hga,paramsObj.zero.lg,paramsObj.zero.lga,oddsObj,isGGNG)
         }
-        else if(hmRating>1 && awRating>1){
+        if(hmRating>1 && awRating>1){
             setOverUnderOdds(paramsObj.one.hg,paramsObj.one.hga,paramsObj.one.lg,paramsObj.one.lga,oddsObj,isGGNG)
         }
-        else if(hmRating>2 && awRating>2){
+        if(hmRating>2 && awRating>2){
             setOverUnderOdds(paramsObj.two.hg,paramsObj.two.hga,paramsObj.two.lg,paramsObj.two.lga,oddsObj,isGGNG)
         }
-        else if(hmRating>3 && awRating>3){
+        if(hmRating>3 && awRating>3){
             setOverUnderOdds(paramsObj.three.hg,paramsObj.three.hga,paramsObj.three.lg,paramsObj.three.lga,oddsObj,isGGNG)
         }
-        else if(hmRating>4 && awRating>4){
+        if(hmRating>4 && awRating>4){
             setOverUnderOdds(paramsObj.four.hg,paramsObj.four.hga,paramsObj.four.lg,paramsObj.four.lga,oddsObj,isGGNG)
         }
-        else if(hmRating>5 && awRating > 5){
+        if(hmRating>5 && awRating > 5){
 
             setOverUnderOdds(paramsObj.five.hg,paramsObj.five.hga,paramsObj.five.lg,paramsObj.five.lga,oddsObj,isGGNG)
         }
-        else if(hmRating>6 && awRating > 6){
+        if(hmRating>6 && awRating > 6){
 
             setOverUnderOdds(paramsObj.six.hg,paramsObj.six.hga,paramsObj.six.lg,paramsObj.six.lga,oddsObj,isGGNG) 
         }
-        else if(hmRating>7 && awRating > 7){
+        if(hmRating>7 && awRating > 7){
 
             setOverUnderOdds(paramsObj.seven.hg,paramsObj.seven.hga,paramsObj.seven.lg,paramsObj.seven.lga,oddsObj,isGGNG)
         }
-        else if(hmRating>8 && awRating > 8){
+        if(hmRating>8 && awRating > 8){
 
             setOverUnderOdds(paramsObj.eight.hg,paramsObj.eight.hga,paramsObj.eight.lg,paramsObj.eight.lga,oddsObj,isGGNG)
         }
-        else if(hmRating>9 && awRating > 9){
+        if(hmRating>9 && awRating > 9){
 
             setOverUnderOdds(paramsObj.nine.hg,paramsObj.nine.hga,paramsObj.nine.lg,paramsObj.nine.lga,oddsObj,isGGNG)
 
@@ -194,50 +200,113 @@ const winDecider = (ratingsDifference,homerating,awayrating)=>{
         wholeNumber = homeWholeNum
         decimal = getRandomDecimal()
         decimal = getDecimalVal(decimal,true)
-        oddsObj.one = wholeNumber + decimal
+        oddsObj.one = (wholeNumber + decimal).toFixed(2)
 
         wholeNumber = awayWholeNum
         decimal = getRandomDecimal()
         decimal = getDecimalVal(decimal,false)
-        oddsObj.two = wholeNumber + decimal
+        oddsObj.two = (wholeNumber + decimal).toFixed(2)
 
         return oddsObj
     }
 
     const getPenaltyOdds = ()=>({
-        yes:3.87,
-        no:1.21
+        yes:"3.87",
+        no:"1.21"
     })
 
     const getRedCardOdds = ()=>({
-        yes:4.12,
-        no:1.19
+        yes:"4.12",
+        no:"1.19"
     })
 
+    const getOdds = (mainVals,winEitherVals,winBothVals)=>{
+        const main = getMainOdds(...mainVals)
+        const gg = getOverUnderOdds(homerating,awayrating,{},ggParamsObj,true)
+        const ou1p5 = getOverUnderOdds(homerating,awayrating,{},ou1p5ParamsObj)
+        const ou2p5 = getOverUnderOdds(homerating,awayrating,{},ou2p5ParamsObj)
+        const ou3p5 = getOverUnderOdds(homerating,awayrating,{},ou3p5ParamsObj)
+        const ou4p5 = getOverUnderOdds(homerating,awayrating,{},ou4p5ParamsObj)
+        const ou0p5Home = getOverOrUnderForHomeOrAway(homerating,null,{},ou0p5HomeParamsObj)
+        const ou0p5Away = getOverOrUnderForHomeOrAway(null,awayrating,{},ou0p5AwayParamsObj)
+        const ou1p5Home = getOverOrUnderForHomeOrAway(homerating,null,{},ou1p5HomeParamsObj)
+        const ou1p5Away = getOverOrUnderForHomeOrAway(null,awayrating,{},ou1p5AwayParamsObj)
+        const conerou8p5 = getOverUnderOdds(homerating,awayrating,{},conerou8p5ParamsObj)
+        const conerou11p5 = getOverUnderOdds(homerating,awayrating,{},conerou11p5ParamsObj)
+        const winEither = getWinEitherOrWinBoth(...winEitherVals)
+        const winBoth = getWinEitherOrWinBoth(...winBothVals)
+        const penalty = getPenaltyOdds()
+        const redCard = getRedCardOdds()
+        return {
+            main,gg,ou1p5,ou2p5,ou3p5,ou4p5,ou0p5Home,ou0p5Away,ou1p5Home,ou1p5Away,conerou8p5,conerou11p5,
+            winEither,winBoth,penalty,redCard
+        }
+    }
     
 
-    let mainObj,ggObj,ou1p5,ou2p5,ou3p5,ou4p5,ou0p5home,ou0p5Away,ou1p5Home,ou1p5Away,conerou8p5,conerou11p5,winEither,winBoth,redCard,penalty
-    //keys zero,one,two,etc maps to how getOverUnderOdds function determines what conditional to run
-    //hg-highgoals, hga-highgoalsarray, lg-lowgoals, lga-lowgoalsarray
-
+    let odds
     switch(ratingsDifference){
         case 0:
-            mainObj = getMainOdds(2,2,3,1)
-            ggObj = getOverUnderOdds(homerating,awayrating,{},ggParamsObj,true)
-            ou1p5 = getOverUnderOdds(homerating,awayrating,{},ou1p5ParamsObj)
-            ou2p5 = getOverUnderOdds(homerating,awayrating,{},ou2p5ParamsObj)
-            ou3p5 = getOverUnderOdds(homerating,awayrating,{},ou3p5ParamsObj)
-            ou4p5 = getOverUnderOdds(homerating,awayrating,{},ou4p5ParamsObj)
-            ou0p5home = getOverOrUnderForHomeOrAway(homerating,null,{},ou0p5HomeParamsObj)
-            ou0p5Away = getOverOrUnderForHomeOrAway(null,awayrating,{},ou0p5AwayParamsObj)
-            ou1p5Home = getOverOrUnderForHomeOrAway(homerating,null,{},ou1p5HomeParamsObj)
-            ou1p5Away = getOverOrUnderForHomeOrAway(null,awayrating,{},ou1p5AwayParamsObj)
-            conerou8p5 = getOverUnderOdds(homerating,awayrating,{},conerou8p5ParamsObj)
-            conerou11p5 = getOverUnderOdds(homerating,awayrating,{},conerou11p5ParamsObj)
-            winEither = getWinEitherOrWinBoth(1,1)
-            winBoth = getWinEitherOrWinBoth(2,2)
-            penalty = getPenaltyOdds()
-            redCard = getRedCardOdds()
+            odds = getOdds([2,2,3,1,1,1],[1,1],[2,2])
             break
+        case 1:
+            odds = getOdds([2,2,3,1,1,1],[1,1],[2,2])
+            break
+        case 2:
+            odds = getOdds([1,2,3,1,1,1],[1,1],[2,3])
+            break 
+        case 3:
+            odds = getOdds([1,2,3,1,1,1],[1,1],[2,3])
+            break
+        case 4:
+            odds = getOdds([1,3,3,1,2,1],[1,2],[2,4])
+            break
+        case 5:
+            odds = getOdds([1,3,3,1,2,1],[1,2],[2,4])
+            break
+        case 6:
+            odds = getOdds([1,5,4,1,3,1],[1,2],[2,6])
+            break
+        case 7:
+            odds = getOdds([1,5,4,1,3,1],[1,2],[2,6])
+            break
+        case 8:
+            odds = getOdds([1,6,5,1,3,1],[1,3],[2,8])
+            break
+        case 9:
+            odds = getOdds([1,6,5,1,3,1],[1,3],[2,8])
+            break
+        case -1:
+            odds = getOdds([2,2,3,1,1,1],[1,1],[2,2])
+            break
+        case -2:
+            odds = getOdds([1,1,3,1,1,1],[1,1],[2,2])
+            break 
+        case -3:
+            odds = getOdds([2,1,3,1,1,1],[1,1],[3,2])
+            break
+        case -4:
+            odds = getOdds([2,1,3,1,1,1],[1,1],[3,2])
+            break
+        case -5:
+            odds = getOdds([2,1,3,1,1,1],[1,1],[3,2])
+            break
+        case -6:
+            odds = getOdds([3,1,3,2,1,1],[2,1],[5,2])
+            break
+        case -7:
+            odds = getOdds([3,1,3,2,1,1],[2,1],[5,2])
+            break
+        case -8:
+            odds = getOdds([4,1,4,2,1,1],[2,1],[6,2])
+            break
+        case -9:
+            odds = getOdds([5,1,5,3,1,1],[3,1],[7,2])
+            break
+        default:
+            console.log(ratingsDifference)
+
     }
+    return odds
 }
+module.exports = calculateOdds
