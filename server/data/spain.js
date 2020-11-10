@@ -9,7 +9,7 @@ const spanishLeagues = {
             
     segundaBArray:["Atletico Baleares","Atletico Madrid B","Celta Vigo B","Coruxo","Getafe B","Ibiza","Internacional",
                 "Langreo","Las Palmas Atletico","Las Rozas","Marino Luanco","Melilla","Oviedo B","Pena Deportiva",
-                "Pontevedra","Racing Ferrol","Rayo Majadahonda","Real Madrid Castilla","San Sebastian de los Reyes",
+                "Pontevedra","Racing Ferrol","Rayo Majadahonda","Real Madrid Castilla","San Sebastian",
                 "Sporting Gijon B"]
     
     

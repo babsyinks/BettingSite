@@ -10,7 +10,7 @@ const {
     ou1p5AwayParamsObj,
     conerou8p5ParamsObj,
     conerou11p5ParamsObj
-} = require('../data/oddsData')
+} = require('../data/oddsData.js')
       
 const calculateOdds = (ratingsDifference,homerating,awayrating)=>{
 
@@ -21,20 +21,23 @@ const calculateOdds = (ratingsDifference,homerating,awayrating)=>{
     const getDecimalVal = (decimalNum,greater)=>{
         let dec = decimalNum
         //home team
-        if(ratingsDifference<=-3){
+        if(ratingsDifference<=-5 || ratingsDifference === 2 || ratingsDifference === 3){
             greater = !greater
         }
-        if(greater){
-            if(decimalNum>0.50){
-              dec = decimalNum-=0.50
+
+            if(greater){
+                if(decimalNum>0.51){
+                dec = decimalNum-=0.50
+                }
             }
-        }
-        //away team
-        else {
-            if(decimalNum<0.50){
-                dec = decimalNum+=0.50
+            //away team
+            else {
+                if(decimalNum<0.51){
+                    dec = decimalNum+=0.50
+                }
             }
-        }
+        
+
         return dec
     }
 
@@ -53,7 +56,7 @@ const calculateOdds = (ratingsDifference,homerating,awayrating)=>{
 
     }
     
-    const getMainOdds = (homeWholeNum,awayWholeNum,drawWholeNum,doubleChanceWholeNumHome,doubleChanceWholeNumAway,doubleChanceWholeNumBoth)=>{
+    const getMainOdds = (homeWholeNum,awayWholeNum,drawWholeNum,doubleChanceWholeNumBoth)=>{
 
         let decimal
         let wholeNumber
@@ -72,16 +75,14 @@ const calculateOdds = (ratingsDifference,homerating,awayrating)=>{
         decimal = getRandomDecimal()
         decimal = getDecimalVal(decimal,randomBool())
         oddsObj.x = (wholeNumber + decimal).toFixed(2)
+  
+        let oneX = +oddsObj.one/1.5
+        oneX = oneX<1?"":oneX.toFixed(2)
+        oddsObj.onex = oneX
 
-        wholeNumber = doubleChanceWholeNumHome 
-        decimal = getRandomDecimal()
-        decimal = getDecimalVal(decimal,true)
-        oddsObj.onex = (wholeNumber + decimal).toFixed(2)
-
-        wholeNumber = doubleChanceWholeNumAway 
-        decimal = getRandomDecimal()
-        decimal = getDecimalVal(decimal,false)
-        oddsObj.xtwo = (wholeNumber + decimal).toFixed(2)
+        let xTwo = +oddsObj.two/1.5
+        xTwo = xTwo<1?"":xTwo.toFixed(2)
+        oddsObj.xtwo = xTwo
 
         wholeNumber = doubleChanceWholeNumBoth
         decimal = getRandomDecimal()
@@ -247,61 +248,61 @@ const calculateOdds = (ratingsDifference,homerating,awayrating)=>{
     let odds
     switch(ratingsDifference){
         case 0:
-            odds = getOdds([2,2,3,1,1,1],[1,1],[2,2])
+            odds = getOdds([2,2,3,1],[1,1],[2,2])
             break
         case 1:
-            odds = getOdds([2,2,3,1,1,1],[1,1],[2,2])
+            odds = getOdds([2,2,3,1],[1,1],[2,2])
             break
         case 2:
-            odds = getOdds([1,2,3,1,1,1],[1,1],[2,3])
+            odds = getOdds([1,2,3,1],[1,1],[2,3])
             break 
         case 3:
-            odds = getOdds([1,2,3,1,1,1],[1,1],[2,3])
+            odds = getOdds([1,2,3,1],[1,1],[2,3])
             break
         case 4:
-            odds = getOdds([1,3,3,1,2,1],[1,2],[2,4])
+            odds = getOdds([1,3,3,1],[1,2],[2,4])
             break
         case 5:
-            odds = getOdds([1,3,3,1,2,1],[1,2],[2,4])
+            odds = getOdds([1,3,3,1],[1,2],[2,4])
             break
         case 6:
-            odds = getOdds([1,5,4,1,3,1],[1,2],[2,6])
+            odds = getOdds([1,5,4,1],[1,2],[2,6])
             break
         case 7:
-            odds = getOdds([1,5,4,1,3,1],[1,2],[2,6])
+            odds = getOdds([1,5,4,1],[1,2],[2,6])
             break
         case 8:
-            odds = getOdds([1,6,5,1,3,1],[1,3],[2,8])
+            odds = getOdds([1,6,5,1],[1,3],[2,8])
             break
         case 9:
-            odds = getOdds([1,6,5,1,3,1],[1,3],[2,8])
+            odds = getOdds([1,6,5,1],[1,3],[2,8])
             break
         case -1:
-            odds = getOdds([2,2,3,1,1,1],[1,1],[2,2])
+            odds = getOdds([2,2,3,1],[1,1],[2,2])
             break
         case -2:
-            odds = getOdds([1,1,3,1,1,1],[1,1],[2,2])
+            odds = getOdds([2,2,3,1],[1,1],[2,2])
             break 
         case -3:
-            odds = getOdds([2,1,3,1,1,1],[1,1],[3,2])
+            odds = getOdds([2,1,3,1],[1,1],[3,2])
             break
         case -4:
-            odds = getOdds([2,1,3,1,1,1],[1,1],[3,2])
+            odds = getOdds([2,1,3,1],[1,1],[3,2])
             break
         case -5:
-            odds = getOdds([2,1,3,1,1,1],[1,1],[3,2])
+            odds = getOdds([2,1,3,1],[1,1],[3,2])
             break
         case -6:
-            odds = getOdds([3,1,3,2,1,1],[2,1],[5,2])
+            odds = getOdds([3,1,3,1],[2,1],[5,2])
             break
         case -7:
-            odds = getOdds([3,1,3,2,1,1],[2,1],[5,2])
+            odds = getOdds([3,1,3,1],[2,1],[5,2])
             break
         case -8:
-            odds = getOdds([4,1,4,2,1,1],[2,1],[6,2])
+            odds = getOdds([4,1,4,1],[2,1],[6,2])
             break
         case -9:
-            odds = getOdds([5,1,5,3,1,1],[3,1],[7,2])
+            odds = getOdds([5,1,5,1],[3,1],[7,2])
             break
         default:
             console.log(ratingsDifference)

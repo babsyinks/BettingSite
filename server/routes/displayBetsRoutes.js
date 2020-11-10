@@ -20,4 +20,4 @@ const matchesWithOdds = fetchMatchesWithOdds(country,league,allCountries)
 res.json(matchesWithOdds) 
 })
 
-module.exports = Router
+module.exports = Router 

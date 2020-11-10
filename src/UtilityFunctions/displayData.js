@@ -1,13 +1,10 @@
-import extractData from "./extractData"
-
-export default function(parentDiv,leagueWrapper,arr) {
+export default function(parentDiv,leagueWrapper,arr,league) {
     var match
     //, one, x, two, onex, onetwo, xtwo
     var subDiv = document.createElement('div')
     subDiv.className = 'subDiv'
-
     let labelDiv = null
-
+  
     function myFilter(array) {
 
       var one, x, two, onex, onetwo, xtwo, gg, ng, ov, un, yes, no
@@ -73,7 +70,7 @@ export default function(parentDiv,leagueWrapper,arr) {
           break
 
         default:
-                        //alert('oho something is wrong'
+                
         }
       }
 
@@ -93,9 +90,21 @@ export default function(parentDiv,leagueWrapper,arr) {
       //grab the second class assigned to the element
       let myClass = spELem.classList.item(1)
     
-      let image = document.createElement('img')
-      image.src = './Images/cancel_edited.jpg'
+      const arrOfChildren = Array.from(calculateDiv.children) 
 
+      for (const el of arrOfChildren) {
+        if(el.className === `${myClass}_${league}`){
+          calculateDiv.removeChild(el)
+        }
+      }
+
+      let image = document.createElement('img')
+      //image.src = './Images/cancel_edited.jpg'
+      image.src = '../../Images/cancel_edited.jpg'
+      image.onclick = ()=>{
+        spELem.style.backgroundColor = 'rgb(3, 38, 143)'
+        deselectOdd(spELem)
+      }
       let classGroups = document.getElementsByClassName(myClass)
 
       let classArr = myClass.split('vs')
@@ -131,9 +140,7 @@ export default function(parentDiv,leagueWrapper,arr) {
       odd.style.fontWeight = 'bold'
       odd.style.color = 'rgb(84, 3, 160)'
       odd.style.textAlign = 'right'
-      //odd.style.position = 'relative'
-      //odd.style.left = '50px'
-      //odd.style.right = '25px'
+
       let moreInfoDiv = document.createElement('div')
       moreInfoDiv.style.display = 'grid'
       moreInfoDiv.style.gridTemplateColumns = '1fr 6fr 1fr'
@@ -147,12 +154,14 @@ export default function(parentDiv,leagueWrapper,arr) {
       holder.appendChild(matchDiv)
       holder.appendChild(moreInfoDiv)
       holder.style.border = '1px solid grey'
+      holder.className = `${myClass}_${league}`
 
-      calculateDiv.appendChild(holder)
+      calculateDiv.prepend(holder)
     }
 
     function retClass(arr, id) {
       let doc = document.getElementById(id)
+      
       let ele, elem
       for (const val of arr) {
         ele = document.getElementsByClassName(val)
@@ -161,26 +170,41 @@ export default function(parentDiv,leagueWrapper,arr) {
           return elem
         }
       }
+    }
 
+    function deselectOdd(spElem){
+      //pick second class. it is of form 'arsenalvschelsea'
+      const matchClass = spElem.classList.item(1)
+      const holder = document.getElementsByClassName(`${matchClass}_${league}`)
+      const calculateDiv = document.getElementById('calculate')
+      const holderArray = Array.from(holder)
+      for (const el of holderArray) {
+        calculateDiv.removeChild(el)
+      }
     }
 
     function handleValClicks(obj) {
-
+      //this handles a odd holding span element that has been selected already,so it deselects it 
+      if(obj.textContent === ''){
+        return
+      }
       if (obj.style.backgroundColor === 'rgb(84, 3, 160)') {
         obj.style.backgroundColor = 'rgb(3, 38, 143)'
+        deselectOdd(obj)
       }
+      //this does the opposite of the above
        else {
         obj.id = 'current'
         obj.setAttribute('style', 'background-color:rgb(84, 3, 160)')
-        let myMatchArr = ['ArsenalvsChelsea',
-          'LiverpoolvsBournemouth',
-          'MancityvsWestHam',
-          'ManUtdvsNewcastle'
-        ]
+        let myMatchArr = arr.map((matchObj)=>{
+          let trimmedStr = matchObj.match.replace(/\s+/g,'')
+          return trimmedStr
+        })
         let myEle = retClass(myMatchArr, 'current')
         for (const elm of myEle) {
           if (elm.id !== 'current' && elm.style.backgroundColor === 'rgb(84, 3, 160)') {
             elm.style.backgroundColor = 'rgb(3, 38, 143)'
+            deselectOdd(elm)
           }
 
         }
@@ -210,31 +234,15 @@ export default function(parentDiv,leagueWrapper,arr) {
         add(v, match)
       })
       leagueWrapper.appendChild(subDiv)
-      parentDiv.appendChild(leagueWrapper)
+      parentDiv.prepend(leagueWrapper)
     }
 
-    function selectOne(id) {
+    function handleMain(i) {
 
-      let arr_ids = ['main', 'gg_ng', 'ou1p5', 'ou2p5', 'ou3p5', 'ou4p5', 'redCard', 'penalty', 'conerou8p5', 'conerou11p5', 'winEither', 'winBoth', 'ou1p5Home', 'ou1p5Away', 'ou0p5Home', 'ou0p5Away']
-      let filtered_arr = arr_ids.filter(currentID => currentID !== id)
-      for (let v of filtered_arr) {
-        let doc = document.getElementById(v)
-
-        if (doc.style.backgroundColor === 'rgb(84, 3, 160)') {
-          doc.setAttribute('style', 'background-color:royalblue')
-          break
-        }
-
-      }
-    }
-
-    function handleMain(i, j) {
-
-      match = arr[i][j].match
-
+      match = arr[i].match
       let arrz = []
 
-      let keys = Object.keys(arr[i][j])
+      let keys = Object.keys(arr[i])
 
       keys = myFilter(keys)
 
@@ -255,45 +263,86 @@ export default function(parentDiv,leagueWrapper,arr) {
           options.className = 'options'
           options.textContent = v.toUpperCase()
           subDiv.appendChild(options)
-
         }
-
       }
 
       for (let k of keys) {
-        arrz.push(arr[i][j][k])
+        arrz.push(arr[i][k])
       }
-
       //arrz.push(one, x, two, onex, onetwo, xtwo)
       display_each(arrz)
 
     }
 
-    function clickOnOption(id) {
-      this.setAttribute('style', 'background-color:rgb(84, 3, 160)')
-      selectOne(id)
-      if (subDiv.hasChildNodes()) {
-        let children = Array.from(subDiv.children)
-        for (let c of children) {
-          subDiv.removeChild(c)
-
-        }
-
-      }
-
-    }
     for (let i = 0; i < arr.length; i++) {
-      for (let j = 0; j < arr[i].length; j++) {
-        if (arr[i][j].name === 'main') {
-          handleMain(i, j)
-
-        }
-
+        if (arr[i].name === 'main') {
+          handleMain(i)
       }
     }
-    (function eventHandlers() {
 
-      let matches_array = extractData('England')
+    function optionsListener(optionObj,id){
+
+      const subDivForLeague = Array.from(leagueWrapper.children)[2] 
+      leagueWrapper.removeChild(subDivForLeague)
+      
+      let subDivToAppend = document.createElement('div')
+
+      if(id === 'main'){
+        subDivToAppend.className = 'subDiv' 
+      }
+      else{
+        subDivToAppend.className = 'subDivMini'
+      }
+      const arrOfChosenOption = arr.filter((obj)=>obj.name === id)
+      optionObj.setAttribute('style', 'background-color:rgb(84, 3, 160)')
+      const disp = document.getElementById(`${league}Display`)
+
+      for (const ch of Array.from(disp.children)) {
+        if(ch.id!==id){
+          ch.setAttribute('style', 'background-color:royalblue')
+        }
+      }
+
+      const mtch = document.createElement('span')
+
+      mtch.className = 'match'
+      mtch.textContent = 'Match'
+
+      subDivToAppend.appendChild(mtch)
+
+      const keys = myFilter(Object.keys(arrOfChosenOption[0])) 
+        
+      for (let v of keys) {
+        let options = document.createElement('span')
+        options.className = 'options'
+        options.textContent = v.toUpperCase()
+        subDivToAppend.appendChild(options)
+
+      }
+      
+      arrOfChosenOption.forEach((obj)=>{
+        const matchSpan = document.createElement('span')
+        matchSpan.className = 'matchSpan'
+        matchSpan.textContent = obj.match
+        subDivToAppend.appendChild(matchSpan)
+
+        keys.forEach((k)=>{
+          const sp = document.createElement('span')
+          const mch = obj.match.replace(/\s+/g, '')
+          sp.className = 'vals'
+          sp.classList.add(mch)
+          sp.textContent = obj[k]
+          sp.addEventListener('click', handleValClicks.bind(this, sp))
+          subDivToAppend.appendChild(sp)         
+        })
+
+      })
+
+      leagueWrapper.appendChild(subDivToAppend)
+
+    }
+
+    (function eventHandlers() {
 
       let main = document.getElementById('main')
       let gg_ng = document.getElementById('gg_ng')
@@ -312,102 +361,37 @@ export default function(parentDiv,leagueWrapper,arr) {
       let ou0p5Home = document.getElementById('ou0p5Home')
       let ou0p5Away = document.getElementById('ou0p5Away')
 
-      function assignHandlers(x) {
-        for (let i = 0; i < matches_array.length; i++) {
-          for (let j = 0; j < matches_array[i].length; j++) {
+      main.addEventListener('click', optionsListener.bind(this, main, 'main'))
 
-            if ((matches_array[i][j].name === 'main') && (x === 'main')) {
-              handleMain(i, j)
-            } else if ((matches_array[i][j].name === 'gg_ng') && (x === 'gg_ng')) {
-              handleMain(i, j)
-            } else if ((matches_array[i][j].name === 'ou1p5') && (x === 'ou1p5')) {
-              handleMain(i, j)
-            } else if ((matches_array[i][j].name === 'ou2p5') && (x === 'ou2p5')) {
-              handleMain(i, j)
-            } else if ((matches_array[i][j].name === 'ou3p5') && (x === 'ou3p5')) {
-              handleMain(i, j)
-            } else if ((matches_array[i][j].name === 'ou4p5') && (x === 'ou4p5')) {
-              handleMain(i, j)
-            } else if ((matches_array[i][j].name === 'redCard') && (x === 'redCard')) {
-              handleMain(i, j)
-            } else if ((matches_array[i][j].name === 'penalty') && (x === 'penalty')) {
-              handleMain(i, j)
-            } else if ((matches_array[i][j].name === 'conerou8p5') && (x === 'conerou8p5')) {
-              handleMain(i, j)
-            } else if ((matches_array[i][j].name === 'conerou11p5') && (x === 'conerou11p5')) {
-              handleMain(i, j)
-            } else if ((matches_array[i][j].name === 'winEither') && (x === 'winEither')) {
-              handleMain(i, j)
-            } else if ((matches_array[i][j].name === 'winBoth') && (x === 'winBoth')) {
-              handleMain(i, j)
-            } else if ((matches_array[i][j].name === 'ou1p5Home') && (x === 'ou1p5Home')) {
-              handleMain(i, j)
-            } else if ((matches_array[i][j].name === 'ou1p5Away') && (x === 'ou1p5Away')) {
-              handleMain(i, j)
-            } else if ((matches_array[i][j].name === 'ou0p5Home') && (x === 'ou0p5Home')) {
-              handleMain(i, j)
-            } else if ((matches_array[i][j].name === 'ou0p5Away') && (x === 'ou0p5Away')) {
-              handleMain(i, j)
-            }
-            //['gg_ng','ou1p5','ou2p5','ou3p5','ou4p5','redCard','penalty','conerou8p5','conerou11p5',
-            //'winEither','winBoth','ou1p5Home','ou1p5Away','ou0p5Home','ou0p5Away']
+      gg_ng.addEventListener('click', optionsListener.bind(this, gg_ng, 'gg_ng'))
 
-          }
-        }
+      ou1p5.addEventListener('click', optionsListener.bind(this, ou1p5, 'ou1p5'))
 
-      }
-      function returnDiv() {
-        let sD = document.getElementsByClassName('subDivMini')[0]
-        let sDM = document.getElementsByClassName('subDiv')[0]
-        subDiv = sD ? sD : sDM
-      }
+      ou2p5.addEventListener('click', optionsListener.bind(this, ou2p5, 'ou2p5'))
 
-      function handle(obj, id) {
-        clickOnOption.call(obj, id)
-        labelDiv = null
-        returnDiv()
+      ou3p5.addEventListener('click', optionsListener.bind(this, ou3p5, 'ou3p5'))
 
-        if (id === 'main') {
-          subDiv.className = 'subDiv'
-        } else {
-          subDiv.className = 'subDivMini'
-        }
+      ou4p5.addEventListener('click', optionsListener.bind(this, ou4p5, 'ou4p5'))
 
-        assignHandlers(id)
+      redCard.addEventListener('click', optionsListener.bind(this, redCard, 'redCard'))
 
-      }
+      penalty.addEventListener('click', optionsListener.bind(this, penalty, 'penalty'))
 
-      main.addEventListener('click', handle.bind(this, main, 'main'))
+      conerou8p5.addEventListener('click', optionsListener.bind(this, conerou8p5, 'conerou8p5'))
 
-      gg_ng.addEventListener('click', handle.bind(this, gg_ng, 'gg_ng'))
+      conerou11p5.addEventListener('click', optionsListener.bind(this, conerou11p5, 'conerou11p5'))
 
-      ou1p5.addEventListener('click', handle.bind(this, ou1p5, 'ou1p5'))
+      winEither.addEventListener('click', optionsListener.bind(this, winEither, 'winEither'))
 
-      ou2p5.addEventListener('click', handle.bind(this, ou2p5, 'ou2p5'))
+      winBoth.addEventListener('click', optionsListener.bind(this, winBoth, 'winBoth'))
 
-      ou3p5.addEventListener('click', handle.bind(this, ou3p5, 'ou3p5'))
+      ou1p5Home.addEventListener('click', optionsListener.bind(this, ou1p5Home, 'ou1p5Home'))
 
-      ou4p5.addEventListener('click', handle.bind(this, ou4p5, 'ou4p5'))
+      ou1p5Away.addEventListener('click', optionsListener.bind(this, ou1p5Away, 'ou1p5Away'))
 
-      redCard.addEventListener('click', handle.bind(this, redCard, 'redCard'))
+      ou0p5Home.addEventListener('click', optionsListener.bind(this, ou0p5Home, 'ou0p5Home'))
 
-      penalty.addEventListener('click', handle.bind(this, penalty, 'penalty'))
-
-      conerou8p5.addEventListener('click', handle.bind(this, conerou8p5, 'conerou8p5'))
-
-      conerou11p5.addEventListener('click', handle.bind(this, conerou11p5, 'conerou11p5'))
-
-      winEither.addEventListener('click', handle.bind(this, winEither, 'winEither'))
-
-      winBoth.addEventListener('click', handle.bind(this, winBoth, 'winBoth'))
-
-      ou1p5Home.addEventListener('click', handle.bind(this, ou1p5Home, 'ou1p5Home'))
-
-      ou1p5Away.addEventListener('click', handle.bind(this, ou1p5Away, 'ou1p5Away'))
-
-      ou0p5Home.addEventListener('click', handle.bind(this, ou0p5Home, 'ou0p5Home'))
-
-      ou0p5Away.addEventListener('click', handle.bind(this, ou0p5Away, 'ou0p5Away'))
+      ou0p5Away.addEventListener('click', optionsListener.bind(this, ou0p5Away, 'ou0p5Away'))
 
     })()
   }

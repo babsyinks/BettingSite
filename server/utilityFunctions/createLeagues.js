@@ -1,4 +1,4 @@
-const {IndividualLeagues,Leagues} = require('../model/model')
+const {IndividualLeagues,Leagues} = require('../model/model.js')
 
 const createLeagues = (teamRating,leagueObj)=>{
 
@@ -23,7 +23,7 @@ const createLeagues = (teamRating,leagueObj)=>{
                     }
 
                    if(!val){
-                      const randNum = Math.floor(Math.random()*5) + 1
+                      const randNum = Math.floor(Math.random()*3) + 1
                       val = {team,rating:randNum}
                    }
 

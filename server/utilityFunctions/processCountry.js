@@ -1,4 +1,4 @@
-const processLeague = require("./processLeague")
+const processLeague = require("./processLeague.js")
 
 const processCountry = (country,countryArr,matchObject,league,fn)=>{
     let team = ''

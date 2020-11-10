@@ -1,4 +1,4 @@
-const createLeagues = require('./createLeagues')
+const createLeagues = require('./createLeagues.js')
 const {englishTeamsRating,spanishTeamsRating,germanTeamsRating,italianTeamsRating} = require('../data/teamRatings')
 
 const createEachLeague = (league,leagueObj)=>{

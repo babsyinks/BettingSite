@@ -1,4 +1,4 @@
-const processCountry = require('./processCountry')
+const processCountry = require('./processCountry.js')
 
 const insertEditedValues = (arr,matchObj)=>{
     const gameIndex = arr.games.findIndex((gameObj)=>gameObj.homeTeam === matchObj.homeTeam && gameObj.awayTeam === matchObj.awayTeam)
