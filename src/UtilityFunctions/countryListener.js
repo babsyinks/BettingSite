@@ -1,21 +1,31 @@
-import selectLeague from './selectLeague'
+import selectLeague from './selectLeague.js'
 
  function leagueListener(altColor,country,league){
-  return function(){
+  return async function(){
     
       if (!altColor) {
         this.setAttribute('style', 'color:rgb(255, 255, 255); background-color:rgb(84, 3, 160);font-weight:bold')
         altColor = true
-        selectLeague(country,league)
+        await selectLeague(country,league)
       } else {
         this.setAttribute('style', 'color:black; background-color:white; font-weight:normal; border:1px solid grey')
         altColor = false
-          let disp = document.getElementById('display')
+          const disp = document.getElementById('display')
           if (disp.hasChildNodes()) {
             let c_arr = Array.from(disp.children)
             for (const v of c_arr) {
               if(v.id === `${league}Wrapper`){
                 disp.removeChild(v)
+              }
+            }
+          }
+          const calculateDiv = document.getElementById('calculate')
+          if(calculateDiv.hasChildNodes()){
+            const arrOfChildren = Array.from(calculateDiv.children)
+            for (const ch of arrOfChildren) {
+              const splitedClassName = ch.className.split('_')
+              if(splitedClassName[1] === league){
+                calculateDiv.removeChild(ch)
               }
             }
           }
@@ -25,6 +35,7 @@ import selectLeague from './selectLeague'
 
  export default function countryListener(div,country,isClicked) {
     return function(){
+      
         const children = div.children
         const arrVal = Array.from(children)
         //remove the children on the div
@@ -33,6 +44,7 @@ import selectLeague from './selectLeague'
         }
         if (!isClicked) {
           //add the various leagues under the right country
+          let altColor = false
           for (let i = 0; i < arrVal.length; i++) {
     
             arrVal[i].setAttribute('style', 'display:block')
@@ -40,7 +52,7 @@ import selectLeague from './selectLeague'
             arrVal[i].setAttribute('style', 'border:1px solid grey')
     
             arrVal[i].className = country + '_League'
-            let altColor = false
+            
     
             arrVal[i].addEventListener('click', leagueListener(altColor,country,arrVal[i].id))
             div.after(arrVal[arrVal.length - i - 1])

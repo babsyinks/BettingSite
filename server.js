@@ -13,7 +13,7 @@ app.use(cookieParser())
 app.use(express.static(path.resolve(__dirname,'client')))
 
 app.use('/access',accessRoutes)
-app.use('/bets',betRoutes)
+app.use('/bets',betRoutes) 
 app.use('/display',displayBetsRoutes)
 app.use(generalRoutes)
 

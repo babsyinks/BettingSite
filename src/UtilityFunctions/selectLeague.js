@@ -1,10 +1,10 @@
-import displayData from './displayData'
-import * as arrs from '../BetData/betData'
-import extractData from './extractData'
+import displayData from './displayData.js'
+import * as arrs from '../BetData/betData.js'
+import extractData from './extract_Data.js'
 
 const{arr_vals,arr_ids} = arrs
 
-const selectLeagueRunner = (league,country)=>{
+const selectLeagueRunner = async (league,country)=>{
     const disp = document.getElementById('display')
 
     if (disp.hasChildNodes()) {
@@ -18,7 +18,7 @@ const selectLeagueRunner = (league,country)=>{
 
     const leagueBetOptions = document.createElement('div')
     leagueBetOptions.id = `${league}Display`
-
+    leagueBetOptions.className = 'display_league'
     for (let i = 0; i < arr_ids.length; i++) {
       const myDiv = document.createElement('div')
       myDiv.setAttribute('id', arr_ids[i])
@@ -30,13 +30,57 @@ const selectLeagueRunner = (league,country)=>{
       leagueBetOptions.appendChild(myDiv)
     }
 
-    const extracted_array = extractData(country,league)
+    const createReadableLabel = (label)=>{
+        if(label === 'epl'){
+            return 'english premier league'
+        }
+        if(country!=="Germany"){
+
+            const filter1 = ['laliga','laliga2']
+            const filter2 = ["segundab","league2","league1","seriea","serieb","seriec"]
+
+            if(filter1.includes(label)){
+               const leagueArr = label.split("")
+               label = leagueArr.reduce((acc,val)=>{
+                    if(val === "a"){
+                        val = "a "
+                    }
+                    if(val === "2"){
+                        val === " 2"
+                    }
+                    return acc + val
+                },'')
+            }
+            
+            if(filter2.includes(label)){
+                const leagueArr = label.split("")
+                label = leagueArr.reduce((acc,val)=>{
+                    if(leagueArr[leagueArr.length-1] === val){
+                        val = ` ${val}`
+                    }
+                    return acc + val
+                },'')
+            }
+        }
+        return label
+    }
+
+    const extracted_array = await extractData(country,league)
     const leagueDiv = document.createElement('div')
     leagueDiv.setAttribute('id',`${league}Wrapper`)
+    const leagueLabel = document.createElement('div')
+    leagueLabel.setAttribute('class','league_label')
+    const leagueText = createReadableLabel(league)
+    leagueLabel.textContent = `${country} - ${leagueText}`
+    leagueDiv.appendChild(leagueLabel)
     leagueDiv.appendChild(leagueBetOptions)
-    disp.appendChild(leagueDiv)
+    disp.appendChild(leagueDiv)   
+    
+   
+    
+    
     //display data on page
-    displayData(disp,leagueDiv,extracted_array)
+    displayData(disp,leagueDiv,extracted_array,league)
 }
 
 export default function(country,league){

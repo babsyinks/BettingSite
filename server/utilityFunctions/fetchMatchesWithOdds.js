@@ -1,5 +1,5 @@
-const tempData = require('../data/dataTemp')
-const calculateOdds = require('./setOdds')
+const tempData = require('../data/dataTemp.js')
+const calculateOdds = require('./setOdds.js')
 
 function assignGamesWithOdds(teams){
     //ratings 5 and above high chance of high scores
@@ -47,6 +47,35 @@ function assignGamesWithOdds(teams){
             ou0p5Away
         } = tempData
 
+        const adjustDoubleChance = (single,doublechance,extraSingle)=>{
+            let singleNum = +single
+            let doublechanceNum = +doublechance
+            if(extraSingle){
+                const extraSingleNum = +extraSingle
+                singleNum = singleNum<=extraSingleNum?singleNum:extraSingleNum
+            }
+            const seperator1 = 0.20
+            const seperator2 = 0.17
+            if(singleNum > 1.29){
+                if(doublechanceNum>=singleNum ){
+                    doublechanceNum = singleNum - seperator1
+                    return doublechanceNum.toFixed(2)
+                }
+                else if((singleNum - doublechanceNum)<0.11){
+                    doublechanceNum = singleNum - seperator2
+                    return doublechanceNum.toFixed(2)
+                }
+                else if(singleNum>1.60 && doublechanceNum < 1.10){
+                    doublechanceNum = singleNum - (singleNum/3)
+                    return doublechanceNum.toFixed(2)
+                }
+                else{
+                    return doublechance
+                }
+            }
+            return ""
+        }
+
         teamsToBeMatched.forEach((tmsObj)=>{
             //{team:'Arsenal',rating:8}
           const{hometeam,awayteam} = tmsObj
@@ -73,41 +102,36 @@ function assignGamesWithOdds(teams){
 
           if(Math.sign(ratingsDiff) === 1){
 
-            if(awayteam.rating === 1){
-                hometeam.rating+=2
-            }
-            else{
+            if(hometeam.rating!==10){
                 hometeam.rating++
-                awayteam.rating--          
             }
-
+            else if(awayteam.rating!==1){
+                    awayteam.rating--
+            }
             }
           else if(Math.sign(ratingsDiff) === -1){
-
-            if(hometeam.rating === 1){
-                    awayteam.rating+=2
+            hometeam.rating++
             }
             else{
+                if(hometeam.rating!==10){
                     hometeam.rating++
-                    awayteam.rating--          
-            }
-            }
-            else{
-                hometeam.rating++
-                awayteam.rating--  
+                }
+                else if(awayteam.rating!==1){
+                    awayteam.rating--
+                }
             }
 
             const match = `${hometeam.team} vs ${awayteam.team}`
-
+           
             main.match = match
             
             main['1'] = mainOdds.one
             main['2'] = mainOdds.two
             main['X'] = mainOdds.x
             main['1X'] = mainOdds.onex
-            main['12'] = mainOdds.onetwo
+            main['12'] = adjustDoubleChance(mainOdds.one,mainOdds.onetwo,mainOdds.two)
             main['X2'] = mainOdds.xtwo
-
+            
             gg.match = match
             gg.gg = ggOdds.gg
             gg.ng = ggOdds.ng
@@ -168,7 +192,9 @@ function assignGamesWithOdds(teams){
             ou0p5Away.ov = ou0p5AwayOdds.ov
             ou0p5Away.un = ou0p5AwayOdds.un
 
-          arrOfAllOdds.push(main,gg,ou1p5,ou2p5,ou3p5,ou4p5,redCard,penalty,conerou8p5,conerou11p5,winEither,winBoth,ou1p5Home,ou1p5Away,ou0p5Home,ou0p5Away)
+          arrOfAllOdds.push({...main},{...gg},{...ou1p5},{...ou2p5},{...ou3p5},{...ou4p5},
+            {...redCard},{...penalty},{...conerou8p5},{...conerou11p5},{...winEither},{...winBoth},
+            {...ou1p5Home},{...ou1p5Away},{...ou0p5Home},{...ou0p5Away})
         })
         return arrOfAllOdds
     }
@@ -208,10 +234,10 @@ function assignGamesWithOdds(teams){
  }
  
  function getLeaguesWithOdds(league,countryObj){
-    const topTier = league === 'EPL'||league === 'La Liga'||league === '1.Bundesliga'||league ==='Serie A'
-    const secondTier = league === 'Championship'||league === 'La Liga2' ||league === '2.Bundesliga'||league === 'Serie B'
-    const thirdTier = league === 'League 1'||league === 'Segunda B'||league === '3.Liga'||league === 'Serie C'
-    const fourthTier = 'League 2'
+    const topTier = league === 'epl'||league === 'laliga'||league === '1.bundesliga'||league ==='seriea'
+    const secondTier = league === 'championship'||league === 'laliga2' ||league === '2.bundesliga'||league === 'serieb'
+    const thirdTier = league === 'league1'||league === 'segundab'||league === '3.liga'||league === 'seriec'
+    const fourthTier = 'league2'
     const leagueArr = countryObj.leagues
     let arrOfOdds
 
@@ -235,82 +261,83 @@ function assignGamesWithOdds(teams){
  }
  
  function fetchMatchesWithOdds(country,league,allCountries){
+     
      let arrOfOdds
     switch(country){
         case 'England':
             const englishLeagues = allCountries[0]
             switch(league){
-               case 'EPL':
+               case 'epl':
                 arrOfOdds = getLeaguesWithOdds(league,englishLeagues)
                     break
-               case 'Championship':
+               case 'championship':
+                arrOfOdds = getLeaguesWithOdds(league,englishLeagues) 
+                   break
+               case 'league1':
                 arrOfOdds = getLeaguesWithOdds(league,englishLeagues)
                    break
-               case 'League 1':
-                arrOfOdds = getLeaguesWithOdds(league,englishLeagues)
-                   break
-               case 'League 2':
+               case 'league2':
                 arrOfOdds = getLeaguesWithOdds(league,englishLeagues)
                    break
                default:
-                   console.log(league)  
+           
+                     
             }
             break
 
         case 'Spain':
             const spanishLeagues = allCountries[1]
             switch(league){
-               case 'La Liga':
+               case 'laliga':
                 arrOfOdds = getLeaguesWithOdds(league,spanishLeagues)
                    break
-               case 'La Liga2':
+               case 'laliga2':
                 arrOfOdds = getLeaguesWithOdds(league,spanishLeagues)
                    break
-               case 'Segunda B':
+               case 'segundab':
                 arrOfOdds = getLeaguesWithOdds(league,spanishLeagues)
                    break    
                default:
-                   console.log(league)
             }
             break
 
         case 'Germany':
             const germanLeagues = allCountries[2]
             switch(league){
-               case '1.Bundesliga':
+               case '1.bundesliga':
                 arrOfOdds = getLeaguesWithOdds(league,germanLeagues)
                    break
-               case '2.Bundesliga':
+               case '2.bundesliga':
                 arrOfOdds = getLeaguesWithOdds(league,germanLeagues)
                    break
-               case '3.Liga':
+               case '3.liga':
                 arrOfOdds = getLeaguesWithOdds(league,germanLeagues)
                    break
                default:
-                   console.log(league)
             }
             break
 
         case 'Italy':
             const italianLeagues = allCountries[3]
             switch(league){
-               case 'Serie A':
+               case 'seriea':
                 arrOfOdds = getLeaguesWithOdds(league,italianLeagues)
                    break 
-               case 'Serie B':
+               case 'serieb':
                 arrOfOdds = getLeaguesWithOdds(league,italianLeagues)
                    break
-               case 'Serie C': 
+               case 'seriec': 
                arrOfOdds = getLeaguesWithOdds(league,italianLeagues)
                    break 
                default:
-                   console.log(league)
                 
             }
             break
         default:
-            console.log(country)    
-        }
+            console.log(country)  
+          
+        } 
+        
         return arrOfOdds
 }
 

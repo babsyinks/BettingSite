@@ -1,4 +1,4 @@
-const processCountry = require('./processCountry')
+const processCountry = require('./processCountry.js')
 
 const deleteGame = (arr,matchObj)=>{
    // arr = arr.games.filter((gameObj)=>gameObj.homeTeam === matchObj.homeTeam && gameObj.awayTeam === matchObj.awayTeam)
