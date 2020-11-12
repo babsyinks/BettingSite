@@ -126,8 +126,10 @@ export default function(parentDiv,leagueWrapper,arr,league) {
       // image
       let imgSp = document.createElement('span')
       imgSp.appendChild(image)
-      imgSp.style.position = 'absolute'
-      imgSp.style.right = '15px'
+      //imgSp.style.position = 'absolute'
+      //imgSp.style.right = '15px'
+      imgSp.style.textAlign = 'right'
+      imgSp.style.paddingRight = '5px'
       // e.g 1, x or 2
       let result = document.createElement('span')
       result.textContent = match_state

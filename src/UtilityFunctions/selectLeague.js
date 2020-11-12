@@ -14,6 +14,14 @@ const selectLeagueRunner = async (league,country)=>{
             disp.removeChild(ch)
           }
       }
+      const headerforBetChamp = document.getElementById('betChampHeader')
+      const imgForBetChamp = document.getElementById('betChamp')
+
+      if(headerforBetChamp && imgForBetChamp){
+        disp.removeChild(headerforBetChamp)
+        disp.removeChild(imgForBetChamp)
+      }
+
     }
 
     const leagueBetOptions = document.createElement('div')
