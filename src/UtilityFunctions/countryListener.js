@@ -19,6 +19,19 @@ import selectLeague from './selectLeague.js'
               }
             }
           }
+        
+          if(disp.childElementCount === 0){
+            const heading = document.createElement('h2')
+            heading.id = 'betChampHeader'
+            heading.textContent = 'Select a country from any of the menus on the left,then choose a league'
+            disp.appendChild(heading)
+            const img = document.createElement('img')
+            img.id = 'betChamp'
+            img.src = '/images/betChamp.jpg'
+            disp.appendChild(img)
+
+          }
+
           const calculateDiv = document.getElementById('calculate')
           if(calculateDiv.hasChildNodes()){
             const arrOfChildren = Array.from(calculateDiv.children)
