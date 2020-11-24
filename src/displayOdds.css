@@ -16,6 +16,7 @@ body{
     font-weight: bold;
     text-align: center;
     padding-top: 15px;
+    font-family: 'Roboto', sans-serif;
 }
 #myGrid {
     display: grid;
@@ -29,7 +30,6 @@ body{
 #Germany,
 #Italy {
     width: 15em;
-    height: 1.2em;
     border: 1px solid black;
     background-color: royalblue;
     color: white;
@@ -38,12 +38,12 @@ body{
     font-family: cursive;
     font-size: 0.9em;
     font-weight: bold;
-    padding-left: 26px;
-    padding-bottom: 24px;
+    padding: 10px 5px;
     box-sizing: border-box;
     user-select: none;
 }
-
+/* padding-left: 26px;
+padding-bottom: 24px; */
 #England div,
 #Spain div,
 #Germany div,
@@ -54,6 +54,30 @@ body{
     display: none;
     user-select: none;
 }
+
+#chooser {
+    margin-left: 15px;
+}
+
+/* [class$="_League"]{
+    width: 7em;
+    height: 1.2em;
+    border: inherit;
+    display: none;
+    user-select: none;
+} */
+
+/* .displayCountryLeagues{
+    display: block;
+    border:1px solid grey
+} */
+
+[class$="_League"]{
+    border:1px solid rgb(221, 221, 221);
+    border-top: 0px;
+    padding: 8px 5px;
+}
+
 
 #display{
     box-sizing: border-box;
@@ -67,9 +91,32 @@ div {
     background-color: black;
     color: rgb(86, 47, 192);
     padding: 20px 5px;
+    font-family: 'Roboto', sans-serif;
 }
 #betChamp{
     margin-left: 30px;
+}
+
+#baller{
+    margin-left: 30px;
+}
+
+#msgDiv{
+    background-color: black;
+    color: rgb(104, 34, 218);
+    font-weight: bold;
+    font-size: 22px;
+    padding: 22px 10px;
+    font-family:'Montserrat', sans-serif;
+    line-height: 32px;
+}
+
+.selectedMatches{
+    border:1px solid rgb(221, 221, 221);
+    border-top:0px;
+    border-left:1px solid grey;
+    border-right:1px solid grey;
+    padding-left:5px;
 }
 
 .league_label{
@@ -142,6 +189,12 @@ div {
     
 }
 
+.odds{
+    font-weight:bold;
+    color:rgb(84, 3, 160);
+    text-align:right;
+}
+
 .subDiv {
     
     display: grid;
@@ -201,6 +254,41 @@ div {
     
 }
 
-#chooser {
-    margin-left: 15px;
+#calculateHeader{
+display: flex;
+justify-content: space-between;
+padding: 10px 5px;
+color: white;
+background-color: rgb(84, 3, 160);
+font-weight: bold;
+border:1px solid rgb(201, 194, 194);
+}
+
+.tabulate{
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 0px;
+}
+#betButton{
+    padding: 5px 0px;
+    background-color: rgb(196, 196, 196);
+    font-weight: bold;
+    font-size: 14px;
+    outline: none;
+    border:none
+}
+
+#betButton:not(:disabled):hover{
+    background-color: green;
+    color:white;
+    cursor: pointer;
+}
+#calculationInfo{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(201, 194, 194);
+    margin-top: 5px;
+    padding: 5px;
+    background-color: rgb(105, 134, 221);
+    font-weight: bold;
 }

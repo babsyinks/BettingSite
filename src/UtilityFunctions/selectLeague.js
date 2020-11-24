@@ -9,8 +9,8 @@ const selectLeagueRunner = async (league,country)=>{
 
     if (disp.hasChildNodes()) {
       const children = Array.from(disp.children)
-      for (const ch of children) {
-          if(ch.id === `${league}Wrapper`){
+      for (const ch of children) { 
+          if(ch.id === `${league}Wrapper`){  
             disp.removeChild(ch)
           }
       }
@@ -21,6 +21,13 @@ const selectLeagueRunner = async (league,country)=>{
         disp.removeChild(headerforBetChamp)
         disp.removeChild(imgForBetChamp)
       }
+
+        const calculateDiv = document.getElementById('calculate')
+        const baller = document.getElementById('baller')
+        if(baller){
+            calculateDiv.removeChild(baller)
+        }
+         
 
     }
 
@@ -89,6 +96,21 @@ const selectLeagueRunner = async (league,country)=>{
     
     //display data on page
     displayData(disp,leagueDiv,extracted_array,league)
+    const calculateDiv = document.getElementById('calculate')
+    if(calculateDiv.childElementCount === 0){
+
+        const calculateDiv = document.getElementById('calculate')
+        const msgDiv = document.createElement('div')
+
+        msgDiv.textContent = `Pick odds from the various matches on the left.There are multiple events to choose odds
+        from.The most recently selected odd for a match will override the previously selected odd.`
+        
+        msgDiv.id = 'msgDiv'
+        calculateDiv.appendChild(msgDiv)
+
+    }
+
+    
 }
 
 export default function(country,league){

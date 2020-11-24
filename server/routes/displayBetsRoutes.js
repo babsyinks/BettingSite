@@ -20,4 +20,8 @@ const matchesWithOdds = fetchMatchesWithOdds(country,league,allCountries)
 res.json(matchesWithOdds) 
 })
 
+Router.post('/bets',auth,async(req,res)=>{
+    console.log(req.body)
+})
+
 module.exports = Router 
