@@ -1,3 +1,5 @@
+import{reCalculateOdds,calculateBonus} from './calculateOdds.js'
+
 export default function(parentDiv,leagueWrapper,arr,league) {
     var match
     //, one, x, two, onex, onetwo, xtwo
@@ -81,7 +83,6 @@ export default function(parentDiv,leagueWrapper,arr,league) {
 
       return other_arrs
     }
-
     //display selected odds on the calculate div
     function displayOnCalculateDiv(spELem) {
 
@@ -104,6 +105,7 @@ export default function(parentDiv,leagueWrapper,arr,league) {
       image.onclick = ()=>{
         spELem.style.backgroundColor = 'rgb(3, 38, 143)'
         deselectOdd(spELem)
+        reCalculateOdds()
       }
       let classGroups = document.getElementsByClassName(myClass)
 
@@ -126,8 +128,6 @@ export default function(parentDiv,leagueWrapper,arr,league) {
       // image
       let imgSp = document.createElement('span')
       imgSp.appendChild(image)
-      //imgSp.style.position = 'absolute'
-      //imgSp.style.right = '15px'
       imgSp.style.textAlign = 'right'
       imgSp.style.paddingRight = '5px'
       // e.g 1, x or 2
@@ -139,9 +139,7 @@ export default function(parentDiv,leagueWrapper,arr,league) {
       // e.g 2.38
       let odd = document.createElement('span')
       odd.textContent = val
-      odd.style.fontWeight = 'bold'
-      odd.style.color = 'rgb(84, 3, 160)'
-      odd.style.textAlign = 'right'
+      odd.className = 'odds'
 
       let moreInfoDiv = document.createElement('div')
       moreInfoDiv.style.display = 'grid'
@@ -155,10 +153,175 @@ export default function(parentDiv,leagueWrapper,arr,league) {
       let holder = document.createElement('div')
       holder.appendChild(matchDiv)
       holder.appendChild(moreInfoDiv)
-      holder.style.border = '1px solid grey'
       holder.className = `${myClass}_${league}`
+      holder.classList.add('selectedMatches')
 
+      const msgDiv = document.getElementById('msgDiv')
+      if(msgDiv){
+        calculateDiv.removeChild(msgDiv)
+      }
       calculateDiv.prepend(holder)
+      const selectedMatchesCount = Array.from(document.getElementsByClassName('selectedMatches')).length
+
+      const oddsLabel = document.createElement('label')
+      oddsLabel.textContent = 'Odds'
+
+      const oddsVal = document.createElement('span')
+      const totalOdds = Array.from(document.getElementsByClassName('odds'))
+      .map((elem)=>+elem.textContent)
+      .reduce((acc,val)=>acc*val,1)
+
+      oddsVal.id = 'oddsVal'
+      oddsVal.textContent = totalOdds.toFixed(2)
+      const  amountLabel = document.createElement('label')
+      amountLabel.textContent = 'Amount'
+      const amountInput = document.createElement('input')
+      amountInput.type = 'text'
+      amountInput.id = 'amountInput'
+      //amountInput.value = ''
+      const bonusLabel = document.createElement('label')
+      bonusLabel.textContent = 'Bonus'
+      const bonusVal = document.createElement('span')
+      bonusVal.id = 'bonusVal'
+
+      let inputEle = document.getElementById('amountInput')
+      const inputVal = inputEle?inputEle.value:''
+      const bonusValue = calculateBonus(totalOdds,selectedMatchesCount,inputVal)
+      bonusVal.textContent = bonusValue.toFixed(2)
+
+      const potentialWinLabel = document.createElement('label')
+      potentialWinLabel.textContent = 'Potential Win'
+      const potentialWinVal = document.createElement('span')
+      potentialWinVal.textContent = ((totalOdds*inputVal) + bonusValue).toFixed(2)
+      potentialWinVal.id = 'potentialWinVal'
+
+      const betButton = document.createElement('input')
+      betButton.id = 'betButton'
+      betButton.type = 'button'
+      betButton.value = 'Bet'
+      betButton.onclick = async ()=>{
+        
+        const selectedMatches = Array.from(document.getElementsByClassName('selectedMatches')) 
+        const arrayOfMatchesAndResults = selectedMatches.map((elem)=>{
+          const match = elem.firstChild.textContent
+          const resultWrapper = Array.from(elem.children)[1] 
+          const result = resultWrapper.firstChild.textContent
+          const league = elem.classList.item(0).split('_')[1]
+          return {match,result,league} 
+        })
+
+        const response = await fetch('/display/bets',{
+          method:'post',
+          headers:{'Accept':'application/json',
+                  'Content-Type':'application/json',
+                  'X-Auth-Token':localStorage.getItem('token')},
+          body:JSON.stringify(arrayOfMatchesAndResults)
+        })
+
+
+      }
+      betButton.disabled = true
+      //****** */
+      //this is the header that display information at the top of all odds
+      let calculateHeader = document.getElementById('calculateHeader')
+      if(calculateHeader){
+        calculateDiv.removeChild(calculateHeader)
+      }
+      calculateHeader = document.createElement('div')
+      calculateHeader.id = 'calculateHeader'
+      const betSlip = document.createElement('span')
+      betSlip.textContent = 'Betslip'
+      const selectedMatchesDetails = document.createElement('span')
+      selectedMatchesDetails.textContent = `Selections:${selectedMatchesCount}`
+      calculateHeader.appendChild(betSlip)
+      calculateHeader.appendChild(selectedMatchesDetails)
+      calculateDiv.prepend(calculateHeader)
+      //this displays different infos about the odds selected like odds,amount,bonus,etc 
+      let calculationInfo = document.getElementById('calculationInfo')
+      const oddsValEle = document.getElementById('oddsVal')
+      const bonusValEle = document.getElementById('bonusVal')
+      const potentialWinValEle = document.getElementById('potentialWinVal')
+      const returnWrapperDiv = (color,fontSize)=>{
+        const div = document.createElement('div')
+        div.className = 'tabulate'
+        if(fontSize){
+          div.style = `color:${color};${fontSize}`
+          return div
+        }
+        div.style = `color:${color}`
+        return div
+      }
+
+      const wrapInSpanWithLabel = (ele)=>{
+        const label = document.createElement('label')
+        label.textContent = '$'
+        label.style = `font-weight:bold;margin-right:2px`
+        const span = document.createElement('span')
+        span.appendChild(label)
+        span.appendChild(ele)
+        return span
+      } 
+
+      if(!calculationInfo){
+        calculationInfo = document.createElement('div')
+        calculationInfo.id = 'calculationInfo' 
+        const oddsDetails = returnWrapperDiv('rgb(141, 0, 0)')
+        oddsDetails.appendChild(oddsLabel)
+        oddsDetails.appendChild(oddsVal)
+        //calculationInfo.appendChild(oddsLabel)
+        calculationInfo.appendChild(oddsDetails)
+        const amountDetails = returnWrapperDiv('black')
+        amountDetails.appendChild(amountLabel)
+        amountDetails.appendChild(wrapInSpanWithLabel(amountInput))
+        //calculationInfo.appendChild(amountLabel)
+        calculationInfo.appendChild(amountDetails)
+        const bonusDetails = returnWrapperDiv('black')
+        bonusDetails.appendChild(bonusLabel)
+        bonusDetails.appendChild(wrapInSpanWithLabel(bonusVal))
+        //calculationInfo.appendChild(bonusLabel)
+        calculationInfo.appendChild(bonusDetails)
+        const potentialWinDetails = returnWrapperDiv('rgb(0, 88, 0)','font-size:20px')
+        //potentialWinDetails.style = 'font-size:18px'
+        potentialWinDetails.appendChild(potentialWinLabel)
+        potentialWinDetails.appendChild(wrapInSpanWithLabel(potentialWinVal))
+        //calculationInfo.appendChild(potentialWinLabel)
+        calculationInfo.appendChild(potentialWinDetails)
+        calculationInfo.appendChild(betButton)
+        calculateDiv.appendChild(calculationInfo)
+      }
+      else{
+        oddsValEle.textContent = oddsVal.textContent
+        bonusValEle.textContent = bonusVal.textContent
+        potentialWinValEle.textContent = potentialWinVal.textContent
+      }
+      
+      amountInput.onkeyup = (e)=>{
+        const rawInput = +e.target.value
+        
+        let inputValue
+        if (Number.isNaN(rawInput) || rawInput === 0 || Math.sign(rawInput) !== 1 || rawInput < 1||rawInput>1000000) {
+          inputValue = ''
+          document.getElementById('amountInput').value = ''
+        }
+        else{
+          inputValue = e.target.value
+        }
+        const totalOdds = Array.from(document.getElementsByClassName('odds'))
+        .map((elem)=>+elem.textContent)
+        .reduce((acc,val)=>acc*val,1) 
+        
+        const selectedMatchesCount = Array.from(document.getElementsByClassName('selectedMatches')).length
+        const bonusValue = calculateBonus(totalOdds,selectedMatchesCount,inputValue)
+        document.getElementById('bonusVal').textContent = bonusValue.toFixed(2)
+        document.getElementById('potentialWinVal').textContent = ((totalOdds*inputValue) + bonusValue).toFixed(2)
+        const betButton = document.getElementById('betButton')
+        if(inputValue.length!==0){
+          betButton.disabled = false
+        }
+        else{
+          betButton.disabled = true
+        }
+      }
     }
 
     function retClass(arr, id) {
@@ -183,16 +346,25 @@ export default function(parentDiv,leagueWrapper,arr,league) {
       for (const el of holderArray) {
         calculateDiv.removeChild(el)
       }
+      if(calculateDiv.childElementCount === 2){
+        const msgDiv = document.createElement('div')
+        msgDiv.textContent = `Pick odds from the various matches on the left.There are multiple events to choose odds
+        from.The most recently selected odd for a match will override the previously selected odd.`
+        
+        msgDiv.id = 'msgDiv'
+        calculateDiv.appendChild(msgDiv)
+      }
     }
 
     function handleValClicks(obj) {
-      //this handles a odd holding span element that has been selected already,so it deselects it 
       if(obj.textContent === ''){
         return
       }
+      //this handles an odd holding span element that has been selected already,so it deselects it 
       if (obj.style.backgroundColor === 'rgb(84, 3, 160)') {
         obj.style.backgroundColor = 'rgb(3, 38, 143)'
         deselectOdd(obj)
+        reCalculateOdds()
       }
       //this does the opposite of the above
        else {
@@ -207,6 +379,7 @@ export default function(parentDiv,leagueWrapper,arr,league) {
           if (elm.id !== 'current' && elm.style.backgroundColor === 'rgb(84, 3, 160)') {
             elm.style.backgroundColor = 'rgb(3, 38, 143)'
             deselectOdd(elm)
+            reCalculateOdds()
           }
 
         }
