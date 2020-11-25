@@ -11,7 +11,7 @@ Router.use(express.json())
 
 Router.use(express.static(path.resolve(__dirname,'..','..','src')))
 
-Router.get('/setOdds',auth,(req,res)=>{
+Router.get('/setOdds',auth,(req,res)=>{ 
 res.json({message:'Welcome'})
 })
 

@@ -2,7 +2,7 @@ var teamStatus = {
   home:'Arsenal',
   away:'Aston Villa'
 }
-//english leagues
+//eng.ls leagues
 const eplArray = ['Arsenal','Aston Villa','Brighton','Burnley','Chelsea',
                   'Crystal Palace','Everton','Fulham','Leeds United','Leicester City','Liverpool',
                   'Manchester City','Manchester United','Newcastle United','Sheffield United',
@@ -219,7 +219,7 @@ const editGame = async()=>{
     clearTextFields()
     document.getElementById('editBtn').value = 'Edit Match'
     } catch (err) {
-      createModal(`Edit operation failed!Check network connection and ensure values are between 1.001 and 99.99`,null,null,'OK',removeModal)
+      createModal(`Edit operation failed!Check network connection and ensure values are between 1.01 and 9.99`,null,null,'OK',removeModal)
       console.log(err.message)
     }
   }
@@ -496,7 +496,19 @@ function assignObj() {
     cornerOver11pt5: null,
     cornerUnder11pt5: null,
     gg: null,
-    ng: null
+    ng: null,
+    winEitherOne:null,
+    winEitherTwo:null,
+    winBothOne:null,
+    winBothTwo:null,
+    over1pt5Home:null,
+    under1pt5Home:null,
+    over1pt5Away:null,
+    under1pt5Away:null,
+    over0pt5Home:null,
+    under0pt5Home:null,
+    over0pt5Away:null,
+    under0pt5Away:null
   }
   let epl, championship, league1, league2, laLiga, laLiga2, segundaB, bundesliga, bundesliga2, Liga3, serieA, serieB, serieC
 
@@ -624,12 +636,12 @@ function closureOnData() {
           else{
             const proceedHandler = ()=>{
               removeModal()
-              window.location.href = '/display/placeBets'
+              window.location.href = 'displayOdds.html'
             }
             createModal('Data Saved! Will You like to go to the public betting page of this site?','YES',proceedHandler,'NO',removeModal)
           }
       } catch (err) {
-        createModal("Couldn't save game.Check network connection and ensure values are between 1.001 and 99.99",null,null,'OK',removeModal)
+        createModal("Couldn't save game.Check network connection and ensure values are between 1.01 and 9.99",null,null,'OK',removeModal)
         console.log(err.message)
       }
     }

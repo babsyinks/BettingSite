@@ -7,7 +7,7 @@ const createLeagues = (teamRating,leagueObj)=>{
     // example = [eplArray, championshipArray,league1Array,league2Array]
     const arrayKeys = Object.keys(leagueObj) 
 
-            //array of form ['10','9','8','7','6']
+            //array of form ['10','9','8','7','6','5','4']
             const teamRatingKeys = Object.keys(teamRating) 
             arrayKeys.forEach((division)=>{
 

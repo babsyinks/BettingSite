@@ -21,6 +21,8 @@ res.json(matchesWithOdds)
 })
 
 Router.post('/bets',auth,async(req,res)=>{
+    const user = await User.findById(req.user.id)
+    const countries = user.allLeagues.countries
     console.log(req.body)
 })
 
