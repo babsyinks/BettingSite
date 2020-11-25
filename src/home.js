@@ -18,7 +18,7 @@ const getRoute = async (route,location)=>{
 
     const data = await response.json()
     if(data.message === 'Welcome'){
-        window.location = location
+        window.location = location 
     }  
     } catch (error) {
         console.log(error.message)

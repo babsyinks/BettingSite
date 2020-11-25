@@ -1,4 +1,21 @@
-const tempData = require('../data/dataTemp.js')
+const{
+    main,
+    gg,
+    ou1p5,
+    ou2p5,
+    ou3p5,
+    ou4p5,
+    redCard,
+    penalty,
+    conerou8p5,
+    conerou11p5,
+    winEither,
+    winBoth,
+    ou1p5Home,
+    ou1p5Away,
+    ou0p5Home,
+    ou0p5Away
+} = require('../data/dataTemp.js')
 const calculateOdds = require('./setOdds.js')
 
 function assignGamesWithOdds(teams){
@@ -7,7 +24,7 @@ function assignGamesWithOdds(teams){
     //ratings proportional to winning chances
     //draw - 10,9 - -1,87 0, 6543 +1, 21 +2 substraction is from lowest rated team
 
-    //returns arr of form [{hometeam:{team:'Arsenal',rating:8},awayteam:{team:'Man Utd',rating:8}}]
+    
     const teamsCopy = teams.slice()
     
     const randTeam = ()=>{
@@ -16,6 +33,7 @@ function assignGamesWithOdds(teams){
         teamsCopy.splice(index,1)
         return randomTeam
         }
+    //returns arr of form [{hometeam:{team:'Arsenal',rating:8},awayteam:{team:'Man Utd',rating:8}}]    
     const teamsToMatchTogether = teams.map((team)=>{
         const hometeam = randTeam()
         const awayteam = randTeam()
@@ -23,29 +41,11 @@ function assignGamesWithOdds(teams){
     })
     .filter((tm)=>tm.hometeam!==undefined)
     
-    //[{hometeam:{team:'Arsenal',rating:8},awayteam:{team:'Man Utd',rating:8}}]
+   
     const teamsWithOdds = (teamsToBeMatched)=>{
 //push arrs of form [{name: 'main',match: match1,'1': '2.30','X': '3.40','2': '2.90','1X': '1.40','12': '1.33','X2': '1.56'},{name: 'gg_ng',match: match1,gg: '1.65',ng: '2.46' },etc] to epl_vals
 //returned arr is of form [ [{},{}], [{},{}], etc ]
         const arrOfAllOdds = []
-        const{
-            main,
-            gg,
-            ou1p5,
-            ou2p5,
-            ou3p5,
-            ou4p5,
-            redCard,
-            penalty,
-            conerou8p5,
-            conerou11p5,
-            winEither,
-            winBoth,
-            ou1p5Home,
-            ou1p5Away,
-            ou0p5Home,
-            ou0p5Away
-        } = tempData
 
         const adjustDoubleChance = (single,doublechance,extraSingle)=>{
             let singleNum = +single
@@ -196,13 +196,96 @@ function assignGamesWithOdds(teams){
             {...redCard},{...penalty},{...conerou8p5},{...conerou11p5},{...winEither},{...winBoth},
             {...ou1p5Home},{...ou1p5Away},{...ou0p5Home},{...ou0p5Away})
         })
+       
         return arrOfAllOdds
     }
     return teamsWithOdds(teamsToMatchTogether)
  }
 
  function getMatches(teams,games){
-     let arrOfOdds
+
+    const mapGamesToOddsObjects = (games)=>{
+
+       const mappedGames = games.map((game)=>{
+
+            const match = `${game.homeTeam} vs ${game.awayTeam}`
+            main.match = match
+            main['1'] = game.one
+            main['2'] = game.two
+            main['X'] = game.x
+            main['1X'] = game.oneX
+            main['12'] = game.oneTwo
+            main['X2'] = game.xTwo
+            
+            gg.match = match
+            gg.gg = game.gg
+            gg.ng = game.ng
+
+            ou1p5.match = match
+            ou1p5.ov = game.over1pt5
+            ou1p5.un = game.under1pt5
+
+            ou2p5.match = match
+            ou2p5.ov = game.over2pt5
+            ou2p5.un = game.under2pt5
+
+            ou3p5.match = match
+            ou3p5.ov = game.over3pt5
+            ou3p5.un = game.under3pt5
+
+            ou4p5.match = match
+            ou4p5.ov = game.over4pt5
+            ou4p5.un = game.under4pt5
+
+            redCard.match = match
+            redCard.yes = game.redcardYes
+            redCard.no = game.redcardNo
+
+            penalty.match = match
+            penalty.yes = game.penaltyYes
+            penalty.no = game.penaltyNo
+
+            conerou8p5.match = match
+            conerou8p5.ov = game.cornerOver8pt5
+            conerou8p5.un = game.cornerUnder8pt5
+
+            conerou11p5.match = match
+            conerou11p5.ov = game.cornerOver11pt5
+            conerou11p5.un = game.cornerUnder11pt5
+
+            winEither.match = match
+            winEither['1'] = game.winEitherOne
+            winEither['2'] = game.winEitherTwo
+
+            winBoth.match = match
+            winBoth['1'] = game.winBothOne
+            winBoth['2'] = game.winBothTwo
+
+            ou1p5Home.match = match
+            ou1p5Home.ov = game.over1pt5Home
+            ou1p5Home.un = game.under1pt5Home
+
+            ou1p5Away.match = match
+            ou1p5Away.ov = game.over1pt5Away
+            ou1p5Away.un = game.under1pt5Away
+
+            ou0p5Home.match = match
+            ou0p5Home.ov = game.over0pt5Home
+            ou0p5Home.un = game.under0pt5Home
+
+            ou0p5Away.match = match
+            ou0p5Away.ov = game.over0pt5Away
+            ou0p5Away.un = game.under0pt5Away
+
+            return [{...main},{...gg},{...ou1p5},{...ou2p5},{...ou3p5},{...ou4p5},
+            {...redCard},{...penalty},{...conerou8p5},{...conerou11p5},{...winEither},{...winBoth},
+            {...ou1p5Home},{...ou1p5Away},{...ou0p5Home},{...ou0p5Away}]
+        })
+        
+        const flattenedMappedGames = mappedGames.reduce((acc,arr)=>acc.concat(arr),[])
+        return flattenedMappedGames
+    }
+
      const arrOfTeams = teams.slice()
     if(games.length !== 0){
         //this means there are games that haven't been set yet from the front end
@@ -219,18 +302,19 @@ function assignGamesWithOdds(teams){
           }) 
 
           //whatever teams are left in arrOfTeams are the ones not set from frontend
-          arrOfOdds = assignGamesWithOdds(arrOfTeams)
+          //return a combination of automatically generated games with odds and games set from frontend
+          return [...assignGamesWithOdds(arrOfTeams),...mapGamesToOddsObjects(games)]
         }
         //this means all games have been set from the frontend
         else{
             //remember to pass in arrOfTeams, not teams
-            return games
+            return mapGamesToOddsObjects(games)
         }
     }
     else{
-        arrOfOdds = assignGamesWithOdds(arrOfTeams)
+        return assignGamesWithOdds(arrOfTeams)
     }
-    return arrOfOdds
+    
  }
  
  function getLeaguesWithOdds(league,countryObj){

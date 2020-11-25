@@ -1,0 +1,54 @@
+const countryAndLeagueIndexes = {
+    epl:{country:0,
+        league:0},
+    championship:{
+        country:0,
+        league:1
+    },
+    league1:{
+        country:0,
+        league:2
+    },
+    league2:{
+        country:0,
+        league:3
+    },
+    laliga:{
+        country:1,
+        league:0 
+    },
+    laliga2:{
+        country:1,
+        league:1
+    },
+    segundab:{
+        country:1,
+        league:2
+    },
+    '1.bundesliga':{
+        country:2,
+        league:0
+    },
+    '2.bundesliga':{
+        country:2,
+        league:1
+    },
+    '3.liga':{
+        country:2,
+        league:2 
+    },
+    seriea:{
+        country:3,
+        league:0
+    },
+    serieb:{
+        country:3,
+        league:1
+    },
+    seriec:{
+        country:3,
+        league:2
+    }
+}
+
+module.exports = countryAndLeagueIndexes
