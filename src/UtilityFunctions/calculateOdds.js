@@ -1,4 +1,5 @@
-    //this calaculates the bonus that will added to the bet amount
+import toCurrency from './displayInCurrencyFormat.js'
+//this calaculates the bonus that will added to the bet amount
     export function calculateBonus(oddsTotal,numOfMatches,amount){
         let bonus
         amount = +amount
@@ -28,17 +29,17 @@
         .reduce((acc,val)=>acc*val,1)
   
         const oddsVal = document.getElementById('oddsVal') 
-        oddsVal.textContent = totalOdds.toFixed(2)
+        oddsVal.textContent = toCurrency(totalOdds.toFixed(2)) 
   
         const inputVal = document.getElementById('amountInput').value
   
         const bonusVal = document.getElementById('bonusVal')
       
         const bonusValue = calculateBonus(totalOdds,selectedMatchesCount,inputVal)
-        bonusVal.textContent = bonusValue.toFixed(2)
+        bonusVal.textContent = toCurrency(bonusValue.toFixed(2)) 
   
         const potentialWinVal = document.getElementById('potentialWinVal')
-        potentialWinVal.textContent = ((totalOdds*inputVal) + bonusValue).toFixed(2)
+        potentialWinVal.textContent = toCurrency(((totalOdds*inputVal) + bonusValue).toFixed(2)) 
   
         const calculateHeader = document.getElementById('calculateHeader')
   

@@ -292,3 +292,11 @@ border:1px solid rgb(201, 194, 194);
     background-color: rgb(105, 134, 221);
     font-weight: bold;
 }
+#error{
+    color:red;
+    background-color: black;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 5px;
+    display: none;
+}

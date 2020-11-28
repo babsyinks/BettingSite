@@ -1,6 +1,6 @@
 import{reCalculateOdds,calculateBonus} from './calculateOdds.js'
-
-export default function(parentDiv,leagueWrapper,arr,league) {
+import toCurrency from './displayInCurrencyFormat.js'
+export default function(parentDiv,leagueWrapper,arr,league,ratingsObj) {
     var match
     //, one, x, two, onex, onetwo, xtwo
     var subDiv = document.createElement('div')
@@ -88,9 +88,10 @@ export default function(parentDiv,leagueWrapper,arr,league) {
 
       let calculateDiv = document.getElementById('calculate')
       let val = spELem.textContent
-      //grab the second class assigned to the element
+      //retrieves class of form arsenalvschelsea
       let myClass = spELem.classList.item(1)
-    
+      //retrieves class of form main,gg,etc
+      const oddCategoryClass = spELem.classList.item(2)
       const arrOfChildren = Array.from(calculateDiv.children) 
 
       for (const el of arrOfChildren) {
@@ -121,8 +122,9 @@ export default function(parentDiv,leagueWrapper,arr,league) {
         }
       }
       let match_state = document.getElementsByClassName('options')[index].textContent
-      // e.g arsenal vs chelsea
+      
       let matchDiv = document.createElement('div')
+      // e.g arsenal vs chelsea
       matchDiv.textContent = match
       matchDiv.style.fontWeight = 'bold'
       // image
@@ -155,7 +157,9 @@ export default function(parentDiv,leagueWrapper,arr,league) {
       holder.appendChild(moreInfoDiv)
       holder.className = `${myClass}_${league}`
       holder.classList.add('selectedMatches')
-
+      holder.classList.add(`ratings_${ratingsObj[myClass]}`)
+      holder.classList.add(`cat_${oddCategoryClass}`)
+      
       const msgDiv = document.getElementById('msgDiv')
       if(msgDiv){
         calculateDiv.removeChild(msgDiv)
@@ -164,7 +168,7 @@ export default function(parentDiv,leagueWrapper,arr,league) {
       const selectedMatchesCount = Array.from(document.getElementsByClassName('selectedMatches')).length
 
       const oddsLabel = document.createElement('label')
-      oddsLabel.textContent = 'Odds'
+      oddsLabel.textContent = 'Odds:'
 
       const oddsVal = document.createElement('span')
       const totalOdds = Array.from(document.getElementsByClassName('odds'))
@@ -172,27 +176,27 @@ export default function(parentDiv,leagueWrapper,arr,league) {
       .reduce((acc,val)=>acc*val,1)
 
       oddsVal.id = 'oddsVal'
-      oddsVal.textContent = totalOdds.toFixed(2)
+      oddsVal.textContent = toCurrency(totalOdds.toFixed(2)) 
       const  amountLabel = document.createElement('label')
-      amountLabel.textContent = 'Amount'
+      amountLabel.textContent = 'Amount:'
       const amountInput = document.createElement('input')
       amountInput.type = 'text'
       amountInput.id = 'amountInput'
       //amountInput.value = ''
       const bonusLabel = document.createElement('label')
-      bonusLabel.textContent = 'Bonus'
+      bonusLabel.textContent = 'Bonus:'
       const bonusVal = document.createElement('span')
       bonusVal.id = 'bonusVal'
 
       let inputEle = document.getElementById('amountInput')
       const inputVal = inputEle?inputEle.value:''
       const bonusValue = calculateBonus(totalOdds,selectedMatchesCount,inputVal)
-      bonusVal.textContent = bonusValue.toFixed(2)
+      bonusVal.textContent = toCurrency(bonusValue.toFixed(2)) 
 
       const potentialWinLabel = document.createElement('label')
-      potentialWinLabel.textContent = 'Potential Win'
+      potentialWinLabel.textContent = 'Pot Win:'
       const potentialWinVal = document.createElement('span')
-      potentialWinVal.textContent = ((totalOdds*inputVal) + bonusValue).toFixed(2)
+      potentialWinVal.textContent = toCurrency(((totalOdds*inputVal) + bonusValue).toFixed(2)) 
       potentialWinVal.id = 'potentialWinVal'
 
       const betButton = document.createElement('input')
@@ -207,7 +211,9 @@ export default function(parentDiv,leagueWrapper,arr,league) {
           const resultWrapper = Array.from(elem.children)[1] 
           const result = resultWrapper.firstChild.textContent
           const league = elem.classList.item(0).split('_')[1]
-          return {match,result,league} 
+          const rating = elem.classList.item(2).split('_')[1]
+          const category = elem.classList.item(3).split('_')[1]
+          return {match,result,league,rating,category} 
         })
 
         const response = await fetch('/display/bets',{
@@ -280,13 +286,16 @@ export default function(parentDiv,leagueWrapper,arr,league) {
         bonusDetails.appendChild(wrapInSpanWithLabel(bonusVal))
         //calculationInfo.appendChild(bonusLabel)
         calculationInfo.appendChild(bonusDetails)
-        const potentialWinDetails = returnWrapperDiv('rgb(0, 88, 0)','font-size:20px')
+        const potentialWinDetails = returnWrapperDiv('rgb(0, 88, 0)','font-size:18px')
         //potentialWinDetails.style = 'font-size:18px'
         potentialWinDetails.appendChild(potentialWinLabel)
         potentialWinDetails.appendChild(wrapInSpanWithLabel(potentialWinVal))
         //calculationInfo.appendChild(potentialWinLabel)
         calculationInfo.appendChild(potentialWinDetails)
         calculationInfo.appendChild(betButton)
+        const errorMessageDiv = document.createElement('div')
+        errorMessageDiv.id = 'error'
+        calculationInfo.appendChild(errorMessageDiv)
         calculateDiv.appendChild(calculationInfo)
       }
       else{
@@ -297,14 +306,19 @@ export default function(parentDiv,leagueWrapper,arr,league) {
       
       amountInput.onkeyup = (e)=>{
         const rawInput = +e.target.value
-        
+        const errorDiv = document.getElementById('error')
         let inputValue
         if (Number.isNaN(rawInput) || rawInput === 0 || Math.sign(rawInput) !== 1 || rawInput < 1||rawInput>1000000) {
           inputValue = ''
           document.getElementById('amountInput').value = ''
+          
+          errorDiv.textContent = 'Wrong input or bet amount exceeds $1,000,000'
+          errorDiv.style = 'display:block'
         }
         else{
           inputValue = e.target.value
+          errorDiv.textContent = ''
+          errorDiv.style = 'display:none'
         }
         const totalOdds = Array.from(document.getElementsByClassName('odds'))
         .map((elem)=>+elem.textContent)
@@ -312,8 +326,8 @@ export default function(parentDiv,leagueWrapper,arr,league) {
         
         const selectedMatchesCount = Array.from(document.getElementsByClassName('selectedMatches')).length
         const bonusValue = calculateBonus(totalOdds,selectedMatchesCount,inputValue)
-        document.getElementById('bonusVal').textContent = bonusValue.toFixed(2)
-        document.getElementById('potentialWinVal').textContent = ((totalOdds*inputValue) + bonusValue).toFixed(2)
+        document.getElementById('bonusVal').textContent = toCurrency(bonusValue.toFixed(2)) 
+        document.getElementById('potentialWinVal').textContent = toCurrency(((totalOdds*inputValue) + bonusValue).toFixed(2)) 
         const betButton = document.getElementById('betButton')
         if(inputValue.length!==0){
           betButton.disabled = false
@@ -349,15 +363,21 @@ export default function(parentDiv,leagueWrapper,arr,league) {
       if(calculateDiv.childElementCount === 2){
         const msgDiv = document.createElement('div')
         msgDiv.textContent = `Pick odds from the various matches on the left.There are multiple events to choose odds
-        from.The most recently selected odd for a match will override the previously selected odd.`
+        from.The most recently selected odd for a match will override the previously selected odd.The minimum and maximum acceptable 
+        bet amounts are $1 and $1,000,000 respectively.The maximum possible win is $1,000,000,000.`
         
         msgDiv.id = 'msgDiv'
         calculateDiv.appendChild(msgDiv)
       }
+      const errorDiv = document.getElementById('error')
+      errorDiv.textContent = ''
+      errorDiv.style = 'display:none'
+
     }
 
     function handleValClicks(obj) {
-      if(obj.textContent === ''){
+
+      if(obj.textContent === ''|| Array.from(document.getElementsByClassName('selectedMatches')).length === 30){
         return
       }
       //this handles an odd holding span element that has been selected already,so it deselects it 
@@ -368,6 +388,23 @@ export default function(parentDiv,leagueWrapper,arr,league) {
       }
       //this does the opposite of the above
        else {
+        let potWin = document.getElementById('potentialWinVal')
+        const errorDiv = document.getElementById('error')
+
+        if(potWin && errorDiv){
+            const potWinNum = +potWin.textContent.split(',').reduce((acc,val)=>acc+val,'')
+            
+            if(potWinNum>1000000000){
+              errorDiv.style= 'display:block'
+              errorDiv.textContent = 'Maximum winnable amount is $1000,000,000'
+              return
+            }
+            else{
+              errorDiv.style ='display:none'
+              errorDiv.textContent = ''
+            }
+        }
+        
         obj.id = 'current'
         obj.setAttribute('style', 'background-color:rgb(84, 3, 160)')
         let myMatchArr = arr.map((matchObj)=>{
@@ -394,6 +431,7 @@ export default function(parentDiv,leagueWrapper,arr,league) {
       mch = mch.replace(/\s+/g, '')
       sp.className = 'vals'
       sp.classList.add(mch)
+      sp.classList.add('main')
       sp.textContent = v
       sp.addEventListener('click', handleValClicks.bind(this, sp))
       subDiv.appendChild(sp)
@@ -506,6 +544,7 @@ export default function(parentDiv,leagueWrapper,arr,league) {
           const mch = obj.match.replace(/\s+/g, '')
           sp.className = 'vals'
           sp.classList.add(mch)
+          sp.classList.add(id)
           sp.textContent = obj[k]
           sp.addEventListener('click', handleValClicks.bind(this, sp))
           subDivToAppend.appendChild(sp)         
