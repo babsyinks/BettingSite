@@ -80,7 +80,7 @@ const selectLeagueRunner = async (league,country)=>{
         return label
     }
 
-    const extracted_array = await extractData(country,league)
+    const {odds:extracted_array,ratings} = await extractData(country,league)
     const leagueDiv = document.createElement('div')
     leagueDiv.setAttribute('id',`${league}Wrapper`)
     const leagueLabel = document.createElement('div')
@@ -95,7 +95,7 @@ const selectLeagueRunner = async (league,country)=>{
     
     
     //display data on page
-    displayData(disp,leagueDiv,extracted_array,league)
+    displayData(disp,leagueDiv,extracted_array,league,ratings)
     const calculateDiv = document.getElementById('calculate')
     if(calculateDiv.childElementCount === 0){
 
@@ -103,7 +103,8 @@ const selectLeagueRunner = async (league,country)=>{
         const msgDiv = document.createElement('div')
 
         msgDiv.textContent = `Pick odds from the various matches on the left.There are multiple events to choose odds
-        from.The most recently selected odd for a match will override the previously selected odd.`
+        from.The most recently selected odd for a match will override the previously selected odd.The minimum and maximum acceptable 
+        bet amounts are $1 and $1,000,000 respectively.The maximum possible win is $1,000,000,000.`
         
         msgDiv.id = 'msgDiv'
         calculateDiv.appendChild(msgDiv)

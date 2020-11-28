@@ -12,13 +12,11 @@ try {
   },
   body:JSON.stringify({country,league})
 })
-const arrOfMatches = await res.json()
-return arrOfMatches
+const matchesObj = await res.json()
+return matchesObj
 } catch (error) {
   console.log(error.message)
 }
-
-
   }
 
   //remember to return arr in above function

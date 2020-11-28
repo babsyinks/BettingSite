@@ -1,4 +1,4 @@
-//'/bets/placeBets'
+const processSubmitedBets = require('../utilityFunctions/processSubmitedBets.js')
 const express = require('express')
 const path = require('path')
 const auth = require('../middlewares/auth')
@@ -23,7 +23,7 @@ res.json(matchesWithOdds)
 Router.post('/bets',auth,async(req,res)=>{
     const user = await User.findById(req.user.id)
     const countries = user.allLeagues.countries
-    console.log(req.body)
+    processSubmitedBets(req.body)
 })
 
 module.exports = Router 
