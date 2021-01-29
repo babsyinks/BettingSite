@@ -23,7 +23,10 @@ res.json(matchesWithOdds)
 Router.post('/bets',auth,async(req,res)=>{
     const user = await User.findById(req.user.id)
     const countries = user.allLeagues.countries
-    processSubmitedBets(req.body)
+    const result = processSubmitedBets(req.body)
+    console.log(result)
+    res.json(result)
+    
 })
 
 module.exports = Router 

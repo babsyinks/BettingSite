@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" href="/images/logo16.png">
-    <script type="text/javascript" src="./admin.js"></script>
+    <script type="module" src="./admin.js"></script>
     <title>Admin Section</title>
 </head>
 
@@ -102,8 +102,8 @@
                         <label for="under0pt5Away">Under 0.5 Away</label><input type="text" name="under0pt5Away" class="odds" maxlength="4">
                     </div>
                     <button id="ok" type="button"><i class="fa fa-plus"></i></button>
-                    <input id = "editBtn" onclick="editGame()" type="button" value="Edit Match">
-                    <input id = "deleteBtn" onclick="deleteGame()" type="button" value="Delete Match">                        
+                    <input id = "editBtn"  type="button" value="Edit Match">
+                    <input id = "deleteBtn"  type="button" value="Delete Match">                        
                 </Form>
             </Fieldset>
         </div> 

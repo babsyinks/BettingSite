@@ -12,7 +12,7 @@ import {reCalculateOdds} from './calculateOdds.js'
       else {
         this.setAttribute('style', 'color:black; background-color:white; font-weight:normal; border:1px solid rgb(221, 221, 221); border-top:0px')
         altColor[league] = false
-          const disp = document.getElementById('display')
+          const disp = document.getElementById('display').children[0]
           if (disp.hasChildNodes()) {
             let c_arr = Array.from(disp.children)
             for (const v of c_arr) {
@@ -33,7 +33,7 @@ import {reCalculateOdds} from './calculateOdds.js'
             disp.appendChild(img)
           }
 
-            const calculateDiv = document.getElementById('calculate')
+            const calculateDiv = document.getElementById('calcContainer')
             const msgDiv = document.getElementById('msgDiv')
             const imgDiv = document.getElementById('betChamp')
 
@@ -66,16 +66,6 @@ import {reCalculateOdds} from './calculateOdds.js'
               }
               reCalculateOdds()
             }
-/* 
-          if(calculateDiv.hasChildNodes()){
-            const arrOfChildren = Array.from(calculateDiv.children)
-            for (const ch of arrOfChildren) {
-              const splitedClassName = ch.className.split('_')
-              if(splitedClassName[1] === league){
-                calculateDiv.removeChild(ch)
-              }
-            }
-          } */
           if(calculateDiv.childElementCount === 0){
             appendBaller()
           }
@@ -113,7 +103,7 @@ export default function countryListener(div,country,isClicked) {
         }
         isClicked = true
   
-        const displ = document.getElementById('display')
+        const displ = document.getElementById('dispContainer')
   
         if (displ.hasChildNodes()) {
           const dispArr = Array.from(displ.children)
@@ -132,7 +122,7 @@ export default function countryListener(div,country,isClicked) {
         const chooser = document.getElementById('chooser')    
         const nodeVals = document.getElementsByClassName(country + '_League')
         const arr = Array.from(nodeVals)
-        const displ = document.getElementById('display')
+        const displ = document.getElementById('dispContainer')
         const dispArr = Array.from(displ.children)
         const chsArr = Array.from(chooser.children)
         for (let dispChild of dispArr) {

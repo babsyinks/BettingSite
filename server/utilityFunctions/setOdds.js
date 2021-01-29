@@ -32,7 +32,7 @@ const calculateOdds = (ratingsDifference,homerating,awayrating)=>{
             }
             //away team
             else {
-                if(decimalNum<0.51){
+                if(decimalNum<0.49){
                     dec = decimalNum+=0.50
                 }
             }
@@ -193,20 +193,20 @@ const calculateOdds = (ratingsDifference,homerating,awayrating)=>{
         return oddsObj
     }
 
-    const getWinEitherOrWinBoth = (homeWholeNum,awayWholeNum)=>{
+    const getWinEitherOrWinBoth = (homeDefaultNum,awayDefaultNum)=>{
 
         let decimal
-        let wholeNumber
+        let defaultNumber
         const oddsObj = {}
-        wholeNumber = homeWholeNum
+        defaultNumber = homeDefaultNum
         decimal = getRandomDecimal()
         decimal = getDecimalVal(decimal,true)
-        oddsObj.one = (wholeNumber + decimal).toFixed(2)
+        oddsObj.one = (defaultNumber + decimal).toFixed(2)
 
-        wholeNumber = awayWholeNum
+        defaultNumber = awayDefaultNum
         decimal = getRandomDecimal()
         decimal = getDecimalVal(decimal,false)
-        oddsObj.two = (wholeNumber + decimal).toFixed(2)
+        oddsObj.two = (defaultNumber + decimal).toFixed(2)
 
         return oddsObj
     }
@@ -254,10 +254,10 @@ const calculateOdds = (ratingsDifference,homerating,awayrating)=>{
             odds = getOdds([2,2,3,1],[1,1],[2,2])
             break
         case 2:
-            odds = getOdds([1,2,3,1],[1,1],[2,3])
+            odds = getOdds([1,2,3,1],[1,1.5],[2,3])
             break 
         case 3:
-            odds = getOdds([1,2,3,1],[1,1],[2,3])
+            odds = getOdds([1,2,3,1],[1,1.5],[2,3])
             break
         case 4:
             odds = getOdds([1,3,3,1],[1,2],[2,4])
@@ -266,10 +266,10 @@ const calculateOdds = (ratingsDifference,homerating,awayrating)=>{
             odds = getOdds([1,3,3,1],[1,2],[2,4])
             break
         case 6:
-            odds = getOdds([1,5,4,1],[1,2],[2,6])
+            odds = getOdds([1,5,4,1],[1,2.5],[2,6])
             break
         case 7:
-            odds = getOdds([1,5,4,1],[1,2],[2,6])
+            odds = getOdds([1,5,4,1],[1,2.5],[2,6])
             break
         case 8:
             odds = getOdds([1,6,5,1],[1,3],[2,8])
@@ -284,28 +284,28 @@ const calculateOdds = (ratingsDifference,homerating,awayrating)=>{
             odds = getOdds([2,2,3,1],[1,1],[2,2])
             break 
         case -3:
-            odds = getOdds([2,1,3,1],[1,1],[3,2])
+            odds = getOdds([2,1,3,1],[1.5,1],[3,2])
             break
         case -4:
-            odds = getOdds([2,1,3,1],[1,1],[3,2])
+            odds = getOdds([2,1,3,1],[1.5,1],[3,2])
             break
         case -5:
-            odds = getOdds([2,1,3,1],[1,1],[3,2])
+            odds = getOdds([2,1,3,1],[2,1],[4,2])
             break
         case -6:
-            odds = getOdds([3,1,3,1],[2,1],[5,2])
+            odds = getOdds([3,1,3,1],[2,1],[4,2])
             break
         case -7:
-            odds = getOdds([3,1,3,1],[2,1],[5,2])
+            odds = getOdds([3,1,3,1],[2.5,1],[5,2])
             break
         case -8:
-            odds = getOdds([4,1,4,1],[2,1],[6,2])
+            odds = getOdds([4,1,4,1],[2.5,1],[5,2])
             break
         case -9:
-            odds = getOdds([5,1,5,1],[3,1],[7,2])
+            odds = getOdds([5,1,5,1],[3,1],[6,2])
             break
         default:
-            console.log(ratingsDifference)
+            break
 
     }
     return odds

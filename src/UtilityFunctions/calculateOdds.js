@@ -45,7 +45,7 @@ import toCurrency from './displayInCurrencyFormat.js'
   
         calculateHeader.textContent = `Betslip   Selections:${selectedMatchesCount}`
         if(selectedMatchesCount === 0){
-          const calculateDiv = document.getElementById('calculate')
+          const calculateDiv = document.getElementById('calcContainer')
           calculateDiv.removeChild(calculateHeader)
           calculateDiv.removeChild(document.getElementById('calculationInfo'))
         }

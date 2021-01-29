@@ -16,7 +16,8 @@ const displayInCurrencyFormat = (str)=>{
         },'')   
     }
     else{
-        wholeNum = str
+        return str
+        
     } 
 
     return wholeNum + '.' + decimalNum
