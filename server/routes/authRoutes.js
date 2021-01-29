@@ -76,7 +76,7 @@ Router.post('/signIn',async (req,res)=>{
     res.cookie('token',token,{httpOnly:true,expires:new Date(Date.now() + 24*60*60)})
     res.json({token})
     } catch (error) {
-        res.status(400).send({message:'Sign in failed.'})
+        res.status(404).send({message:'Sign in failed.'})
     }
 
 

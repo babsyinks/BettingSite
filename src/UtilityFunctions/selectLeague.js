@@ -5,8 +5,8 @@ import extractData from './extract_Data.js'
 const{arr_vals,arr_ids} = arrs
 
 const selectLeagueRunner = async (league,country)=>{
-    const disp = document.getElementById('display')
-
+    const display = document.getElementById('display')
+    const disp = display.children[0]
     if (disp.hasChildNodes()) {
       const children = Array.from(disp.children)
       for (const ch of children) { 
@@ -23,9 +23,10 @@ const selectLeagueRunner = async (league,country)=>{
       }
 
         const calculateDiv = document.getElementById('calculate')
+        const calcDivChild = calculateDiv.children[0]
         const baller = document.getElementById('baller')
         if(baller){
-            calculateDiv.removeChild(baller)
+            calcDivChild.removeChild(baller)
         }
          
 
@@ -90,16 +91,14 @@ const selectLeagueRunner = async (league,country)=>{
     leagueDiv.appendChild(leagueLabel)
     leagueDiv.appendChild(leagueBetOptions)
     disp.appendChild(leagueDiv)   
-    
+    display.appendChild(disp)
    
-    
-    
     //display data on page
     displayData(disp,leagueDiv,extracted_array,league,ratings)
-    const calculateDiv = document.getElementById('calculate')
+    const calculateDiv = document.getElementById('calcContainer')
+    
     if(calculateDiv.childElementCount === 0){
 
-        const calculateDiv = document.getElementById('calculate')
         const msgDiv = document.createElement('div')
 
         msgDiv.textContent = `Pick odds from the various matches on the left.There are multiple events to choose odds

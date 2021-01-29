@@ -70,7 +70,7 @@ function clearTextFields(){
                       }
                  }
 
-const removeModal = ()=>{
+export const removeModal = ()=>{
   const wrapper = document.getElementsByClassName('wrapper')[0]
   const modal = document.getElementsByClassName('modal')[0]
   const backdrop = document.getElementsByClassName('backdrop')[0]
@@ -88,15 +88,18 @@ const removeModal = ()=>{
   setTimeout(()=>{
   wrapper.removeChild(backdrop)
   wrapper.removeChild(modal)
+  const dim = document.getElementsByClassName('dim')[0]
+  if(dim){
+  
+    dim.classList.remove('dim')
+  }
   },600)
-
 
 }
 
-const createModal = (message,confirmLabel,confirmHandler,cancelLabel,cancelHandler)=>{
+export const createModal = (message,confirmLabel,confirmHandler,cancelLabel,cancelHandler,isEle)=>{
 
 const wrapper = document.getElementsByClassName('wrapper')[0]
-wrapper.className = 'wrapper'
 
 const backdrop = document.createElement('div')
 backdrop.className = 'backdrop'
@@ -110,10 +113,6 @@ const span  = document.createElement('span')
 const spanTextNode = document.createTextNode('X')
 span.onclick = removeModal
 span.appendChild(spanTextNode)
-
-const messageTextNode = document.createTextNode(message)
-const paragraph = document.createElement('p')
-paragraph.appendChild(messageTextNode)
 
 const Div = document.createElement('div')
 
@@ -138,7 +137,16 @@ if(abort){
 }
 
 modal.appendChild(span)
-modal.appendChild(paragraph)
+if(isEle ===undefined){
+  const messageTextNode = document.createTextNode(message)
+  const paragraph = document.createElement('p')
+  paragraph.appendChild(messageTextNode)
+  modal.appendChild(paragraph)
+}
+else{
+  modal.appendChild(isEle)
+}
+
 modal.appendChild(Div)
 
 wrapper.appendChild(backdrop)
@@ -260,7 +268,8 @@ const deleteGame = async()=>{
 }
 
 function myAdmin() {
-
+  document.getElementById('editBtn').onclick = editGame
+  document.getElementById('deleteBtn').onclick = deleteGame
   let country = document.getElementById('country')
   loadTeams(eplArray)
 

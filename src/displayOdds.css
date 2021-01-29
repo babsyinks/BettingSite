@@ -1,18 +1,22 @@
 body{
-    max-width: 97vw;
+    margin:5px;
+    width: 99.2vw;
+    overflow-x: hidden;
 }
-
+img{
+    display: inline-block;
+}
 #heading{
     display: grid;
     grid-template-columns: 1fr 9fr 2fr;
-    margin-left: 15px;
+    width: 100%;
     background-color: black;
     color:rgb(45, 83, 196);
     margin-bottom: 5px;
 }
 
 #heading span{
-    font-size: 36px;
+    font-size:  2.64vw;
     font-weight: bold;
     text-align: center;
     padding-top: 15px;
@@ -22,21 +26,21 @@ body{
     display: grid;
     grid-template-columns: 2fr 7fr 3fr;
     grid-template-rows: auto auto 2fr;
-   
+    width: 100%;
 }
 
 #England,
 #Spain,
 #Germany,
 #Italy {
-    width: 15em;
+    width: 17.57vw;
     border: 1px solid black;
     background-color: royalblue;
     color: white;
     border-radius: 2px;
     text-align: left;
     font-family: cursive;
-    font-size: 0.9em;
+    font-size: 1.054vw;
     font-weight: bold;
     padding: 10px 5px;
     box-sizing: border-box;
@@ -56,7 +60,7 @@ padding-bottom: 24px; */
 }
 
 #chooser {
-    margin-left: 15px;
+    width: 17.57vw;
 }
 
 /* [class$="_League"]{
@@ -76,39 +80,53 @@ padding-bottom: 24px; */
     border:1px solid rgb(221, 221, 221);
     border-top: 0px;
     padding: 8px 5px;
+    font-size: 1.054vw;
 }
 
 
 #display{
     box-sizing: border-box;
+    
 }
 
 div {
     user-select: none;
 }
-#betChampHeader{
-    margin-left: 30px;
+
+#dispContainer{
+    margin-left: 2.196vw;
+}
+
+#betChampHeader{ 
     background-color: black;
     color: rgb(86, 47, 192);
     padding: 20px 5px;
     font-family: 'Roboto', sans-serif;
+    font-size: 1.757vw;
 }
 #betChamp{
-    margin-left: 30px;
+    display: inline-block;
+    width: 100%;
+}
+
+#calcContainer{
+    margin-left: 2.196vw;
+    font-size: 1.171vw;
 }
 
 #baller{
-    margin-left: 30px;
+   display: inline-block;
+   width: 100%; 
 }
 
 #msgDiv{
     background-color: black;
     color: rgb(104, 34, 218);
     font-weight: bold;
-    font-size: 22px;
+    font-size: 1.61vw;
     padding: 22px 10px;
     font-family:'Montserrat', sans-serif;
-    line-height: 32px;
+    line-height: 4.87vh;
 }
 
 .selectedMatches{
@@ -120,9 +138,8 @@ div {
 }
 
 .league_label{
-    margin-left: 30px;
     text-transform: capitalize;
-    font-size: 16px;
+    font-size: 1.171vw;
     padding: 5px 0px;
     color: rgb(69, 0, 180);
     font-weight: bolder;
@@ -134,59 +151,64 @@ div {
     grid-template-rows: auto;
     grid-template-areas: 'div div div div';
     justify-items: space-evenly;
-    
-    height: 205px;
+    height: 31.20vh;
     grid-gap: 1px;
-    width: 84.5%;
-    margin: 0px 30px;
 }
 
 .style_divs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 1px solid black;
     background-color: royalblue;
     color: white;
     border-radius: 2px;
-    text-align: center;
-    padding-top: 11px;
     font-family: cursive;
-    font-size: 0.9em;
+    font-size: 1.054vw;
     font-weight: bold;
-    height: 50px;
-    width: 188px;
+    height: 7.61vh;
     box-sizing: border-box;
 }
 
 .vals {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 1px solid black;
     background-color: rgb(3, 38, 143);
     color: white;
     border-radius: 2px;
-    text-align: center;
-    padding: 7px 2px 0px;
     font-family: cursive;
-    font-size: 0.9em;
+    font-size: 1.054vw;
     font-weight: bold;
-    margin: 5px 0px 5px 5px;
-    height: 35px;
-    width: 40px;
+    margin: 0.76vh 0px 0.76vh 0.366vw;
+    height: 5.327vh;
     box-sizing: border-box;
 }
 
 .matchSpan {
+    display: flex;
+    justify-content: start;
+    align-items: center;
     border: 1px solid black;
     background-color: rgb(12, 56, 189);
     color: white;
     border-radius: 2px;
-    text-align: left;
-    padding:7px 2px 0px;
+    padding-left:2px;
     font-family: cursive;
-    font-size: 0.9em;
+    font-size: 1.0542vw;
     font-weight: bold;
-    height: 35px;
-    width: 92%;
+    height: 5.327vh;
+    width: 95%;
     box-sizing: border-box;
-    margin-top: 5px;
+    margin-top: 0.76vh;
     
+}
+
+.catg{
+    color:rgb(189, 189, 189);
+    text-align:left; 
+    text-transform: capitalize; 
 }
 
 .odds{
@@ -196,61 +218,59 @@ div {
 }
 
 .subDiv {
-    
     display: grid;
     justify-content: space-between;
     grid-template-columns: 6fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: auto;
-    grid-template-areas: '.matchSpan .vals .vals .vals .vals .vals .vals';
-    width: 95%;
+    
     box-sizing: border-box;
-    margin: 5px 30px;
+    margin: 0.76vh 0px;
 }
 
 .subDivMini {
-    
     display: grid;
-    grid-template-columns: 6fr 1fr 1fr;
+    grid-template-columns: 10fr 1fr 1fr;
     grid-template-rows: auto;
-    grid-template-areas: '.matchSpan '' '' '' '' .vals .vals';
-    width: 99.5%;
     box-sizing: border-box;
-    margin: 5px 30px;
+    margin: 0.76vh 0px
 }
 
 .match {
+    display: flex;
+    align-items: center;
     background-color: cornflowerblue;
     color: black;
     border-radius: 2px;
-    text-align: left;
     font-family: cursive;
-    font-size: 0.9em;
+    font-size:  1.054vw;
     font-weight: bold;
-    height: 35px;
-    width: 92%;
-    padding:7px 2px 0px;
+    height:5.327vh;
+    width: 95%;
+    padding:0px 2px;
     box-sizing: border-box;
-    margin-top: 5px;
+    margin-top: 0.76vh;
     
 }
 
 .options {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: cornflowerblue;
     color: black;
     border-radius: 2px;
     text-align: center;
-    padding-top: 7px;
     font-family: cursive;
-    font-size: 0.9em;
+    font-size: 1.054vw;
     font-weight: bold;
-    margin: 5px 0px 5px 5px;
-    height: 35px;
-    width: 40px;
+    margin: 0.76vh 0px 0.76vh 0.366vw;
+    height: 5.327vh;
     box-sizing: border-box;
 }
 
 #calculate {
     box-sizing: border-box;
+    width:23.21vw;
     
 }
 
@@ -269,11 +289,16 @@ border:1px solid rgb(201, 194, 194);
     justify-content: space-between;
     padding: 2px 0px;
 }
+#amountInput{
+    display: inline-block;
+    font-size: 0.976vw;
+    width: 12.37vw;
+}
 #betButton{
     padding: 5px 0px;
     background-color: rgb(196, 196, 196);
     font-weight: bold;
-    font-size: 14px;
+    font-size: 1.025vw;
     outline: none;
     border:none
 }
@@ -296,7 +321,269 @@ border:1px solid rgb(201, 194, 194);
     color:red;
     background-color: black;
     font-weight: bold;
-    font-size: 16px;
-    padding: 5px;
+    font-size: 1.171vw;
+    padding:  0.366vw;
     display: none;
+}
+
+/* this section deals with info modal */
+.wrapper{
+    position: relative;   
+    width: 100%;
+    overflow-x: hidden;
+}
+.backdrop{
+   position:absolute;
+   left: 0;
+   top: 0;
+   height: 100%;
+   width: 100%;
+   z-index: 10; 
+
+}
+
+.modal{
+    display: flex;
+    flex-direction: column;
+    position:absolute;
+    padding:10px;
+    top: 0;
+    bottom: 0;
+    right:0;
+    left: 0;
+    background-color: white;
+    border:0px solid black;
+    width:40%;
+    height: fit-content;
+    max-height: 60%;
+    margin:auto;
+    z-index: 50;
+}
+
+.modal p {
+    font-size: 24px;
+    line-height: 35px;
+    margin-top: -30px;
+}
+
+.modal>div{
+    width: 100%;
+    overflow-y: scroll;
+
+    background-color: white;
+}
+
+.modal span{
+    padding:  0.1522vh 0.878vw 1.522vh 2.928vw;
+    position: absolute;
+    top:0;
+    right: 0;
+    cursor: pointer;
+    color: grey;
+    font-size: 1.171vw;
+}
+
+.grp{
+    margin-bottom :3.044vh;
+}
+
+.wrap{
+    margin-bottom:1.522vh;
+}
+
+.sep{
+    margin-bottom:4.566vh
+}
+
+.dim{
+    background-color: rgba(0,0,0, 0.2);
+}
+
+.modal>.butDiv{
+    height: 20vh;
+    overflow-y: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+@keyframes modalFadeOut{
+    0%{
+        opacity: 1;
+    }
+    25%{
+        opacity: 0.75;
+    }
+    50%{
+        opacity: 0.5;
+    }
+    75%{
+        opacity: 0.25;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
+@keyframes modalFadeIn{
+    0%{
+        opacity: 0;
+    }
+    25%{
+        opacity: 0.25;
+    }
+    50%{
+        opacity: 0.5;
+    }
+    75%{
+        opacity: 0.75;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+@keyframes backdropFadeIn{
+    0%{
+        opacity: 0;
+    }
+    25%{
+        opacity: 0.175;
+    }
+    50%{
+        opacity: 0.35;
+    }
+    75%{
+        opacity: 0.525;
+    }
+    100%{
+        opacity: 0.7;
+    }    
+}
+
+@keyframes backdropFadeOut{
+    0%{
+        opacity: 0.7;
+    }
+    25%{
+        opacity: 0.525;
+    }
+    50%{
+        opacity: 0.35;
+    }
+    75%{
+        opacity: 0.175;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
+
+#proceed{
+    width: 50%;
+    padding: 10px 5px;
+    background-color: rgb(59, 235, 59);
+    font-weight: bold;
+    transition:all 0.6s ease-in-out;
+    outline: none;
+    border: none;
+    font-weight: bold;
+    font-size: 1.171vw;
+}
+
+#proceed:hover{
+    color: white;
+    background-color: rgb(0, 97, 0);
+}
+
+.headerEle{
+    font-size:1.464vw;
+    font-weight:bold;
+    color:rgb(111, 0, 255);
+    text-align:center;
+    padding:1.522vh 0.366vw;
+}
+
+.outcome{
+ font-size: 1.318vw;
+ padding: 10px 5px;
+ font-weight: bold;
+}
+
+.outcomeSuccess{
+ color: green;
+}
+.outcomeFailure{
+ color: red;
+}
+
+.imgIndicator{
+ padding-left: 0.732vw;
+ 
+ width: 1.3177vw;
+}
+
+.resultDetail{
+    font-size: 1.171vw;
+}
+
+@media only screen and (orientation:portrait){
+.vals,.matchSpan,.options,.match{
+    height: 2.327vh;
+}
+.style_divs{
+    height: 3vh;
+}
+.display_league{
+    height: auto;
+}
+#msgDiv{
+    line-height: normal;
+}
+
+.grp,.sep,.wrap{
+    margin-bottom:auto;
+}
+.headerEle{
+    padding:0px;
+}
+
+}
+
+@media only screen and (max-width:1000px){
+    .style_divs{
+       width: 13.3vw; 
+    }
+    
+}
+
+@media only screen and (max-width:600px){
+#amountInput {
+    width: 10.37vw;
+}
+}
+
+@media only screen and (max-width:500px){
+    #betChampHeader{ 
+        font-size: 1.6vw;
+    }
+    #amountInput {
+        width: 9.37vw;
+        height: 0.2vh;
+    }
+
+}
+
+
+@media only screen and (max-width:330px){  
+    #betChampHeader{ 
+        font-size: 1.5vw;
+    }
+    #amountInput {
+        width: 7.37vw;
+        height: 0.05vh;
+    }
+
 }
