@@ -4,13 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="signIn.js"></script>
+    <link rel="stylesheet" type="text/css" href="signUpOrIn.css">
     <link rel="icon" href="/images/logo16.png">
-    <title>Sign In</title>
+    <title>Please Login With Your Details</title>
 </head>
 <body>
-    <h1>Sign In</h1>
-    <input type="text" name="email"/>
-    <input type="text" name="password"/>
-    <input type="submit" value="submit" onclick="signIn()"/>
+    <div class="sign">
+        <h1>Sign In</h1>
+        <div>
+            <label>Email:</label><input type="text" name="email"/>
+        </div>
+        <div>
+            <label>Password:</label><input type="password" name="password"/>
+        </div>
+        <input type="submit" value="submit" onclick="signIn()"/>
+        <div class="error_SignIn"></div>
+    </div>
+
 </body>
 </html>

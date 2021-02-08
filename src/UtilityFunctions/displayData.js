@@ -512,7 +512,7 @@ export default function(parentDiv,leagueWrapper,arr,league,ratingsObj) {
           } */
         }
         const matchClass = obj.classList.item(1)
-        const calcDiv = document.getElementById('calculate')
+        const calcDiv = document.getElementById('calcContainer')
         let classObj = {}
         for (const ch of calcDiv.children) {
           if(ch.classList.item(0) === `${matchClass}_${league}`){
@@ -715,7 +715,6 @@ export default function(parentDiv,leagueWrapper,arr,league,ratingsObj) {
           return {match,odd,index:getIndex(id,chosenOutcome)}
        })
 
-       //{match,chosenOutcome,odd,index:getIndex(id,chosenOutcome)}
        arr.forEach((obj)=>{
         const{match,odd,index} = obj
         const selectedSpan = document.querySelectorAll(`.vals.${match}.${id}`)[index]

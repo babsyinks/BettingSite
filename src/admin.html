@@ -16,26 +16,31 @@
 
 <body>
     <div class="wrapper">
-        <div>
+        <div class="allGrps">
+
             <Fieldset>
                 <Legend>
                     Add Match
                 </Legend>
                 <Form>
                     <div id="grp1">
-                        <label for="home">Home Team</label>
-                        <span id = "homeSpan"></span>
-                            
-                        <label for="away">Away Team</label>
-                        <span id = "awaySpan"></span>
-                                
-                        <label for="country">Country</label>
-                        <select name="country" id="country">
-                            <option value="England" selected>England</option>
-                            <option value="Spain">Spain</option>
-                            <option value="Germany">Germany</option>
-                            <option value="Italy">Italy</option>
-                        </select>
+                        <span>
+                                <label for="home">Home Team</label>
+                                <span id = "homeSpan"></span>
+                        </span>
+                        <span>
+                                <label for="away">Away Team</label>
+                                <span id = "awaySpan"></span>
+                        </span>
+                        <span>
+                            <label for="country">Country</label>
+                            <select name="country" id="country">
+                                    <option value="England" selected>England</option>
+                                    <option value="Spain">Spain</option>
+                                    <option value="Germany">Germany</option>
+                                    <option value="Italy">Italy</option>
+                            </select>
+                        </span>
                         <span id="sp">
                          <label for="league">League</label>
                          <select name="leagues" id="leagues">
@@ -44,7 +49,6 @@
                              <option value="League 1">League 1</option>
                              <option value="League 2">League 2</option>
                          </select>
-
                         </span>
                     </div>
                     <div id="grp2">
@@ -105,6 +109,7 @@
                     <input id = "editBtn"  type="button" value="Edit Match">
                     <input id = "deleteBtn"  type="button" value="Delete Match">                        
                 </Form>
+
             </Fieldset>
         </div> 
     </div>

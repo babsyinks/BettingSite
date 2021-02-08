@@ -8,7 +8,7 @@ img{
 }
 #heading{
     display: grid;
-    grid-template-columns: 1fr 9fr 2fr;
+    grid-template-columns: 1fr 9fr 1fr;
     width: 100%;
     background-color: black;
     color:rgb(45, 83, 196);
@@ -22,6 +22,16 @@ img{
     padding-top: 15px;
     font-family: 'Roboto', sans-serif;
 }
+
+#heading div p{
+    font-size:  1.5vw;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 5px;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+}
+
 #myGrid {
     display: grid;
     grid-template-columns: 2fr 7fr 3fr;

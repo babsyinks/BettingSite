@@ -16,10 +16,15 @@ const signIn = async ()=>{
     })
     })
     const data = await result.json()
+    if(data.error){
+        throw new Error(data.error)
+    }
     localStorage.setItem('token',data.token)
     window.location = '/home'
     } catch (error) {
-        console.log(error.message)
+        if(error.message){
+            document.getElementsByClassName('error_SignIn')[0].textContent = error.message
+        }
     }
  
 }

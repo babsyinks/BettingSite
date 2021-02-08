@@ -23,14 +23,15 @@ const getRoute = async (route,location)=>{
     } catch (error) {
         console.log(error.message)
     }
-    
 }
  
 const setOdds = ()=>{
-    getRoute('/bets/setOdds','admin.html')
+    getRoute('/bets/setOdds','admin')
 }
 
 const placeBets = ()=>{
-    getRoute('/display/placeBets','displayOdds.html')
-}
+    getRoute('/display/placeBets','bet')
+} 
+
+
 

@@ -16,11 +16,17 @@ const signUp = async ()=>{
     })
     })
     const data = await result.json()
-    localStorage.setItem('token',data.token)
-    window.location = '/home'
+    
+    if(data.error){
+        throw new Error(data.error)
+    }
+      localStorage.setItem('token',data.token) 
+      window.location = '/registrationSuccess' 
     
     } catch (error) {
-        console.log(error.message)
+        if(error.message){
+            document.getElementsByClassName('error_SignUp')[0].textContent = error.message
+        }
     }
   }
 

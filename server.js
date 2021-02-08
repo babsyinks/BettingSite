@@ -17,6 +17,10 @@ app.use('/bets',betRoutes)
 app.use('/display',displayBetsRoutes)
 app.use(generalRoutes)
 
+app.use((err,req,res,next)=>{
+    res.status(500).send({message:err.message})
+})
+  
 app.listen(3000,()=>{
     console.log('Listening on port 3000')
 })

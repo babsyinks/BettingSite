@@ -6,36 +6,40 @@ body{
 label {
     font-weight: bold;
     text-align: right;
-    margin: 5px;
+    margin:0.366vw;
 }
 
 input {
-    width: 2.5em;
-    margin: 5px;
+    width: 2.928vw;
+    height: 1.1vw;
+    margin: 0.366vw;
+    font-size: 0.976vw;
 }
 
 input.team {
-    width: 9em;
+    width: 10.54vw;
 }
 
 select{
-    padding:5px;
-    margin:10px;
+    padding:0.366vw;
+    margin:0.732vw;
+    font-size: 1.171vw;
 }
 
 form {
-    padding: 10px;
+    padding: 0.732vw;
     background-color: rgb(235, 230, 230);
+    font-size: 1.171vw;
 }
 
 form div {
     border: 2px solid black;
-    margin: 5px;
+    margin: 0.366vw;
     background-color: rgb(250, 248, 248);
 }
 
 legend {
-    font-size: 18px;
+    font-size: 1.317vw;
     font-weight: bold;
     color: rebeccapurple;
 }
@@ -56,6 +60,11 @@ button,input[type='button']{
     position: relative;
     height: 100vh;
     width: 100vw;
+    overflow-x: hidden;
+    
+}
+.allGrps{
+    height: 100%;
 }
 .backdrop{
    position:absolute;
@@ -73,7 +82,7 @@ button,input[type='button']{
     align-items: center;
     flex-direction: column;
     position:absolute;
-    padding:10px;
+    padding:0.732vw;
     top: 0;
     bottom: 0;
     right:0;
@@ -87,9 +96,9 @@ button,input[type='button']{
 }
 
 .modal p {
-    font-size: 24px;
-    line-height: 35px;
-    margin-top: -30px;
+    font-size:1.757vw;
+    line-height: 2.562vw;
+    margin-top:  2.196vw;
 }
 
 .modal div{
@@ -102,7 +111,7 @@ button,input[type='button']{
 }
 
 .modal span{
-    padding: 10px;
+    padding: 0.732vw;
     position: absolute;
     top:0;
     right: 0;
@@ -185,10 +194,12 @@ button,input[type='button']{
 #proceed{
     width:30%;
     height: 30%;
+    font-size: 0.976vw;
     background-color: rgb(59, 235, 59);
     font-weight: bold;
     box-shadow: 0.5px 0.5px 0.5px 0.5px rgb(1, 32, 1) inset;
     transition:all 0.6s ease-in-out;
+    font-size: 3vh;
 }
 
 #proceed:hover{
@@ -206,6 +217,7 @@ button,input[type='button']{
     font-weight: bold;
     box-shadow: 0.5px 0.5px 0.5px 0.5px rgb(32, 1, 1) inset;
     transition:all 0.6s ease-in-out; 
+    font-size: 3vh;
 }
 
 #abort:hover{
@@ -217,57 +229,61 @@ button,input[type='button']{
 }
 
 #ok {
-    width: 3.5em;
-    height: 3.5em;
-    margin: 5px;
+    width: 4.1vw;
+    height: 4.1vw;
+    margin: 0.366vw;
     border:1px solid black;
     border-radius: 100%;
     font-weight: bold;
     background-color: rebeccapurple;
     box-shadow: 2px 1px 2px 2px rgb(17, 0, 34);
     outline: none;   
+    font-size: 0.976vw;
+    text-align: center;
 }
 
 #ok:hover {
-    font-size: 1em;
+    font-size: 1.171vw;
     background-color: rgb(57, 8, 105);
     color: white;
     animation: actionBtn 0.6s ease-in-out;
 }
 
 #editBtn{
-    width: 13em;
-    height: 3.5em;
-    margin: 5px 40px;
+    width: 15.23vw;
+    height: 4.1vw;
+    margin: 0.366vw 2.928vw;
     border:1px solid black;
     border-radius: 5%;
     font-weight: bold;
     background-color: rgb(48, 32, 187);
     box-shadow: 2px 1px 2px 2px rgb(2, 3, 65);
     outline: none;
+    font-size: 0.976vw;
 }
 
 #editBtn:hover{
-    font-size: 1em;
+    font-size: 1.171vw;
     background-color:  rgb(14, 17, 190);
     color: white;
     animation: actionBtn 0.6s ease-in-out;
 }
 
 #deleteBtn{
-    width: 13em;
-    height: 3.5em;
-    margin: 5px;
+    width: 15.23vw;
+    height: 4.1vw;
+    margin:0.366vw;
     border:1px solid black;
     border-radius: 5%;
     font-weight: bold;
     background-color: rgb(192, 33, 33);
     box-shadow: 2px 1px 2px 2px rgb(41, 1, 1);
     outline: none;
+    font-size: 0.976vw;
 }
 
 #deleteBtn:hover{
-    font-size: 1em;
+    font-size: 1.171vw;
     background-color: rgb(230, 18, 18);
     color: white;
     animation: actionBtn 0.6s ease-in-out;
@@ -294,3 +310,73 @@ button,input[type='button']{
         transform:translate(0px,0px);
     }
 }
+@media only screen and (max-height:1100px){
+    #grp2,#grp3,#grp4,#grp5,#grp6,#grp7,#grp8,#grp9,#grp10{
+        height: 8vh;
+    }
+}
+@media only screen and (max-height:900px){
+    #grp2,#grp3,#grp4,#grp5,#grp6,#grp7,#grp8,#grp9,#grp10{
+        height: 7.2vh;
+    }
+}
+
+@media only screen and (max-height:700px){
+    #grp2,#grp3,#grp4,#grp5,#grp6,#grp7,#grp8,#grp9,#grp10{
+        height: 6.5vh;
+    }
+}
+
+@media only screen and (orientation:portrait){
+    #grp1>span{
+    display: block;
+    font-size: 200%;
+    }
+    select{
+    font-size: 100%;
+    }
+    #proceed{
+        
+        font-size: 3vw;
+    }
+    #abort{
+        font-size: 3vw;
+    }
+    .modal{
+        height: 30%;
+        width: 60%;
+    }
+
+    .modal p {
+        font-size: 1.757vh;
+        line-height: 2.562vh;
+        margin-top: 2.196vh;
+    }
+
+   #grp2,#grp3,#grp4,#grp5,#grp6,#grp7,#grp8,#grp9,#grp10{
+        height: 8vh;
+        display: flex;
+        align-items: center;
+    } 
+    [id^="grp"]>label{
+        font-size: 200%;
+    }
+    #ok{
+        width: 10%;
+        height: 5vh;
+        font-size: 3vw;
+    }
+    #editBtn,#deleteBtn{
+        width: 25%;
+        height: 5vh;  
+        font-size: 3vw;
+    }
+    legend{
+        font-size: 1.317vh
+    }
+    input {
+        font-size: 0.976vh;
+    }
+}
+
+

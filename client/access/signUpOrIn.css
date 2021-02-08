@@ -1,0 +1,84 @@
+.sign{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 90vh;
+}
+
+.sign h1{
+font-size: 2.34vw;
+}
+
+.sign label{
+    display: inline-block;
+    padding-right: 2.2vw;
+    width:3.66vw;
+    text-align: left;
+    font-weight: bold;
+    font-size: 1.171vw;
+}
+
+.sign div{
+    margin-bottom:  1.464vw;
+}
+
+.sign input[type="text"], .sign input[type="password"]{
+    padding:0.732vw 1.1vw;
+    font-size: 0.976vw;
+}
+
+.sign input[type="submit"]{
+    padding:0.732vw 1.1vw;
+    width: 22vw;
+    background-color: rgb(93, 182, 182);
+    outline: none;
+    border: none;
+}
+
+.sign input[type="submit"]:hover{
+    color: rgb(44, 78, 78);
+    background-color: white;
+    border:1px solid  rgb(93, 182, 182);
+    font-weight: bold;
+}
+
+.error_SignIn,.error_SignUp{
+    font-weight: bold;
+    color: red;
+    font-size: 1.171vw;
+    padding:0.732vw;
+}
+
+@media only screen and (orientation:portrait){
+    
+    .sign h1{
+    font-size: 2.34vh;
+    }
+    
+    .sign label{
+        padding-right: 2.2vh;
+        width:3.66vh;
+
+        font-size: 1.171vh;
+    }
+    
+    .sign div{
+        margin-bottom:  1.464vh;
+    }
+    
+    .sign input[type="text"], .sign input[type="password"]{
+        padding:0.732vh 1.1vh;
+        font-size: 0.976vh;
+    }
+    
+    .sign input[type="submit"]{
+        padding:0.732vh 1.1vh;
+        width: 22vh;
+    }
+    
+    .error_SignIn,.error_SignUp{
+        font-size: 1.171vh;
+        padding:0.732vh;
+    }
+}

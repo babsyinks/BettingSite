@@ -6,11 +6,12 @@
     <link rel="stylesheet" type="text/css" href="index.css">
     <link rel="icon" href="/images/logo16.png">
     <script type="text/javascript" src="home.js"></script>
+    <script type="text/javascript" src="signOut.js"></script>
     <title>Fun Betting</title>
 </head>
 <body>
     <nav>
-        <a href="access/signOut">Sign Out</a>
+        <button onclick="signOut()">Sign Out</button>
     </nav>
 
 <div class="wrapper">
@@ -28,9 +29,9 @@
         Have fun!!!
     </p>
 
-    <div>
-        <button onclick="setOdds()">Set Odds Before Placing Bets</button> 
-        <button onclick="placeBets()">Place Bets Without Setting Odds</button>  
+    <div class="ctrBtns">
+        <button class="oddsBtn" onclick="setOdds()">Set Odds Before Placing Bets</button> 
+        <button class="oddsBtn" onclick="placeBets()">Place Bets Without Setting Odds</button>  
     </div>
       
 </div>
