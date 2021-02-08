@@ -14,7 +14,9 @@ const auth = (req,res,next)=>{
     const verifyObj = jwt.verify(token,process.env.TOKEN_SECRET)
 
     req.user = verifyObj.user
-
+    res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+    res.header('Expires', '-1');
+    res.header('Pragma', 'no-cache');   
     next()  
     } catch (error) {
         return res.redirect('/access/signIn')

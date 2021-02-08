@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema({
         unique:true,
         trim:true,
         lowercase:true,
-        required:true
+        required:[true,'Email is required']
        /*  validate(value){
             if(!validator.isEmail(value)){
                 throw new Error('Invalid Email')
@@ -43,7 +43,7 @@ const userSchema = new mongoose.Schema({
         type:String,
         trim:true,
         minlength:6,
-        required:true
+        required:[true,'Password is required']
     },
 
     allLeagues:countrySchema

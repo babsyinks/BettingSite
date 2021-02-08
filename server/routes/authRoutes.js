@@ -17,7 +17,7 @@ const createEachLeague = require('../utilityFunctions/individualLeaguesRunner')
 
 const Router = express.Router() 
 
-Router.use(express.json()) 
+Router.use(express.json())  
 
 Router.get('/signUp',(req,res)=>{
     res.sendFile(path.resolve('client','signUp.html'))
@@ -28,30 +28,48 @@ Router.get('/signIn',(req,res)=>{
 })
 
 Router.post('/signUp', async(req,res)=>{
- 
- const englishLeagues = createEachLeague('english',ENGLISH_LEAGUES)
- const spanishLeagues = createEachLeague('spanish',SPANISH_LEAGUES)
- const germanLeagues = createEachLeague('german',GERMAN_LEAGUES)
- const italianLeagues = createEachLeague('italian',ITALIAN_LEAGUES)
+    try {
+        const {email,password} = req.body
+        if(!email || !password){
+            return res.status(400).send({
+                error:'Invalid Input' 
+            })
+        }
+        
+        const englishLeagues = createEachLeague('english',ENGLISH_LEAGUES)
+        const spanishLeagues = createEachLeague('spanish',SPANISH_LEAGUES)
+        const germanLeagues = createEachLeague('german',GERMAN_LEAGUES)
+        const italianLeagues = createEachLeague('italian',ITALIAN_LEAGUES)
 
- const countriesLeagues = new Country({countries:[englishLeagues,spanishLeagues,germanLeagues,italianLeagues]})
- 
- const {email,password} = req.body
+        const countriesLeagues = new Country({countries:[englishLeagues,spanishLeagues,germanLeagues,italianLeagues]})
 
- const user = {email,password,allLeagues:countriesLeagues}
-    
- const salt = await bcrypt.genSalt(10)
- user.password = await bcrypt.hash(password,salt)
+        const user = {email,password,allLeagues:countriesLeagues}
+            
+        const salt = await bcrypt.genSalt(10)
+        user.password = await bcrypt.hash(password,salt)
 
- const newUser = new User(user)
+        const newUser = new User(user)
 
- await newUser.save()
- 
- const token = jwt.sign({user:{id:newUser.id}},process.env.TOKEN_SECRET,{expiresIn:24*60*60})
+        await newUser.save()
+        
+        const token = jwt.sign({user:{id:newUser.id}},process.env.TOKEN_SECRET,{expiresIn:24*60*60})
 
-    res.cookie('token',token,{httpOnly:true,expires:new Date(Date.now() + 24*60*60)})
-    
-    res.json({token})
+            res.cookie('token',token,{httpOnly:true,expires:new Date(Date.now() + 24*60*60)})
+            
+           return res.json({token})
+    } catch (error) {
+        String.prototype.inc
+        const err = (error.errors !== undefined) && (error.errors['email'].message||error.errors['password'].message)
+        if(error.message.includes('E11000 duplicate key error collection')){
+            return res.status(400).send({error:'The Email You Provided Already Exists'})
+        }
+        if(err){
+           return res.status(400).send({error:`${err}`})
+        }
+        else{
+           return res.status(500).send({error:'Error In Account Creation.Enter The Proper Information Or Try Again Later'})
+        }
+    }
 })
 
 Router.post('/signIn',async (req,res)=>{
@@ -63,24 +81,29 @@ Router.post('/signIn',async (req,res)=>{
     const user = await User.findOne({email})
 
     if(!user){
-        return res.status(400).send({message:'Invalid Credentials'})
+        return res.status(400).send({error:'Invalid Credentials'})
     }
 
     const isCorrect = await bcrypt.compare(password,user.password)
     
     if(!isCorrect){
-       return  res.status(400).send({message:'Invalid Credentials'})
+       return  res.status(400).send({error:'Invalid Credentials'})
     }
 
     const token = jwt.sign({user:{id:user.id}},process.env.TOKEN_SECRET,{expiresIn:24*60*60})
     res.cookie('token',token,{httpOnly:true,expires:new Date(Date.now() + 24*60*60)})
     res.json({token})
     } catch (error) {
-        res.status(404).send({message:'Sign in failed.'})
+        res.status(404).send({error:'Sign in failed.'})
     }
 
 
     
+})
+
+Router.get('/signOut',(req,res)=>{
+    res.cookie('token',{expires:Date.now()})
+    res.send({logout:true})
 })
 
 module.exports = Router

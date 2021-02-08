@@ -4,13 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="signUp.js"></script>
+    <link rel="stylesheet" type="text/css" href="signUpOrIn.css">
     <link rel="icon" href="/images/logo16.png">
     <title>Sign Up</title>
 </head>
 <body>
-    <h1>Sign Up</h1>
-        <input type="text" name="email"/>
-        <input type="text" name="password"/>
+    <div class="sign">
+        <h1>Create Your Account</h1>
+        <div >
+            <label>Email:</label><input type="text" name="email"/>
+        </div>
+        <div>
+           <label>Password:</label><input type="password" name="password"/> 
+        </div>
         <input type="submit" value="submit" onclick="signUp()"/>
+        <div class="error_SignUp"></div>
+    </div>
 </body>
 </html>

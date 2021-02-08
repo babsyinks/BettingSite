@@ -24,7 +24,6 @@ Router.post('/bets',auth,async(req,res)=>{
     const user = await User.findById(req.user.id)
     const countries = user.allLeagues.countries
     const result = processSubmitedBets(req.body)
-    console.log(result)
     res.json(result)
     
 })
