@@ -16,7 +16,9 @@ app.use('/access',accessRoutes)
 app.use('/bets',betRoutes) 
 app.use('/display',displayBetsRoutes)
 app.use(generalRoutes)
-
+app.get('*',(req,res)=>{
+    res.redirect('/')
+})
 app.use((err,req,res,next)=>{
     res.status(500).send({message:err.message})
 })
