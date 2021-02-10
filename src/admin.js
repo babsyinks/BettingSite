@@ -2,7 +2,7 @@ var teamStatus = {
   home:'Arsenal',
   away:'Aston Villa'
 }
-//eng.ls leagues
+//english leagues
 const eplArray = ['Arsenal','Aston Villa','Brighton','Burnley','Chelsea',
                   'Crystal Palace','Everton','Fulham','Leeds United','Leicester City','Liverpool',
                   'Manchester City','Manchester United','Newcastle United','Sheffield United',
@@ -300,7 +300,6 @@ function myAdmin() {
     var elem = addOptions(arr)
     appendToSpan(elem)
     clearTextFields()
-    //addLgChangeEvent()
 
   }
 
@@ -568,7 +567,6 @@ function closureOnData() {
       
       let odds = document.querySelectorAll('input[class = odds]')
       for (let v of odds) {
-        // v.value.replace(/^0+/, '')
         //convert the string input to a number
         let numVal = +v.value
         //validate numeric inputs for odds
@@ -587,19 +585,9 @@ function closureOnData() {
       let vals = []
 
       for (let v of nodes) {
-/*         if (/^0+/.test(v.value)) {
-          v.value = parseInt(`${v.value}`, 10)
-          v.value = `${v.value}`
-        }
- */
         vals.push(parseFloat(v.value).toFixed(2))
         
       }
-/*       if (/^0+/.test(`${v.value}`)) {
-        v.value = parseInt(`${v.value}`, 10)
-      }
-
-      vals.push(parseFloat(v.value).toFixed(2)) */
       return vals
     }
 

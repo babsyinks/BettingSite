@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-
+const validateVals = require('validator')
 const individualLeaguesSchema = new mongoose.Schema({
             teams:[{
                     team:String,
@@ -31,22 +31,20 @@ const userSchema = new mongoose.Schema({
         unique:true,
         trim:true,
         lowercase:true,
-        required:[true,'Email is required']
-       /*  validate(value){
-            if(!validator.isEmail(value)){
-                throw new Error('Invalid Email')
-            }
-        } */
+        required:[true,'Email is required'],
+        validate:{
+            validator:validateVals.isEmail,
+            message:(v)=>`${v.value} is an invalid email`
+        }
     },
 
     password:{
         type:String,
         trim:true,
-        minlength:6,
         required:[true,'Password is required']
     },
 
-    allLeagues:countrySchema
+    allLeagues:countrySchema 
 
 })
 

@@ -51,32 +51,3 @@ const processMatch = (matchObj,countryArr)=>{
 }
 
 module.exports = processMatch
-/* 
-{ one: '1.1',
-  x: '2',
-  two: '2',
-  oneX: '2',
-  oneTwo: '3',
-  xTwo: '3',
-  over2pt5: '2',
-  under2pt5: '5',
-  over1pt5: '6',
-  under1pt5: '7',
-  over3pt5: '7',
-  under3pt5: '4',
-  over4pt5: '5',
-  under4pt5: '8',
-  redcardYes: '8',
-  redcardNo: '6',
-  penaltyYes: '4',
-  penaltyNo: '3',
-  cornerOver8pt5: '3',
-  cornerUnder8pt5: '4',
-  cornerOver11pt5: '6',
-  cornerUnder11pt5: '7',
-  gg: '3',
-  ng: '5',
-  homeTeam: 'Arsenal',
-  awayTeam: 'Aston Villa',
-  country: 'England',
-  league: 'EPL' } */
