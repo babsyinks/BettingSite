@@ -56,6 +56,11 @@ img{
     box-sizing: border-box;
     user-select: none;
 }
+<<<<<<< HEAD
+=======
+/* padding-left: 26px;
+padding-bottom: 24px; */
+>>>>>>> b2d4bb1e8256bd219cda10cc4bf3c59c3a20a835
 #England div,
 #Spain div,
 #Germany div,
@@ -71,6 +76,22 @@ img{
     width: 17.57vw;
 }
 
+<<<<<<< HEAD
+=======
+/* [class$="_League"]{
+    width: 7em;
+    height: 1.2em;
+    border: inherit;
+    display: none;
+    user-select: none;
+} */
+
+/* .displayCountryLeagues{
+    display: block;
+    border:1px solid grey
+} */
+
+>>>>>>> b2d4bb1e8256bd219cda10cc4bf3c59c3a20a835
 [class$="_League"]{
     border:1px solid rgb(221, 221, 221);
     border-top: 0px;

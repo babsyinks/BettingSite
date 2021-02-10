@@ -5,6 +5,10 @@ import {colors} from '../BetData/betData.js'
 const{purple,royalBlue} = colors
 export default function(parentDiv,leagueWrapper,arr,league,ratingsObj) {
     var match
+<<<<<<< HEAD
+=======
+    //, one, x, two, onex, onetwo, xtwo
+>>>>>>> b2d4bb1e8256bd219cda10cc4bf3c59c3a20a835
     var subDiv = document.createElement('div')
     subDiv.className = 'subDiv'
     let labelDiv = null
@@ -131,6 +135,10 @@ export default function(parentDiv,leagueWrapper,arr,league,ratingsObj) {
       // e.g arsenal vs chelsea
       matchDiv.textContent = match
       matchDiv.style.fontWeight = 'bold'
+<<<<<<< HEAD
+=======
+      // image
+>>>>>>> b2d4bb1e8256bd219cda10cc4bf3c59c3a20a835
       let imgSp = document.createElement('span')
       imgSp.appendChild(image)
       imgSp.style.textAlign = 'right'
@@ -197,6 +205,10 @@ export default function(parentDiv,leagueWrapper,arr,league,ratingsObj) {
       const amountInput = document.createElement('input')
       amountInput.type = 'text'
       amountInput.id = 'amountInput'
+<<<<<<< HEAD
+=======
+      //amountInput.value = ''
+>>>>>>> b2d4bb1e8256bd219cda10cc4bf3c59c3a20a835
       const bonusLabel = document.createElement('label')
       bonusLabel.textContent = 'Bonus:'
       const bonusVal = document.createElement('span')
@@ -310,6 +322,10 @@ export default function(parentDiv,leagueWrapper,arr,league,ratingsObj) {
         
       }
       betButton.disabled = true
+<<<<<<< HEAD
+=======
+      //****** */
+>>>>>>> b2d4bb1e8256bd219cda10cc4bf3c59c3a20a835
       //this is the header that display information at the top of all odds
       let calculateHeader = document.getElementById('calculateHeader')
       if(calculateHeader){
@@ -356,18 +372,36 @@ export default function(parentDiv,leagueWrapper,arr,league,ratingsObj) {
         const oddsDetails = returnWrapperDiv('rgb(141, 0, 0)')
         oddsDetails.appendChild(oddsLabel)
         oddsDetails.appendChild(oddsVal)
+<<<<<<< HEAD
+=======
+        //calculationInfo.appendChild(oddsLabel)
+>>>>>>> b2d4bb1e8256bd219cda10cc4bf3c59c3a20a835
         calculationInfo.appendChild(oddsDetails)
         const amountDetails = returnWrapperDiv('black')
         amountDetails.appendChild(amountLabel)
         amountDetails.appendChild(wrapInSpanWithLabel(amountInput))
+<<<<<<< HEAD
+=======
+        //calculationInfo.appendChild(amountLabel)
+>>>>>>> b2d4bb1e8256bd219cda10cc4bf3c59c3a20a835
         calculationInfo.appendChild(amountDetails)
         const bonusDetails = returnWrapperDiv('black')
         bonusDetails.appendChild(bonusLabel)
         bonusDetails.appendChild(wrapInSpanWithLabel(bonusVal))
+<<<<<<< HEAD
         calculationInfo.appendChild(bonusDetails)
         const potentialWinDetails = returnWrapperDiv('rgb(0, 88, 0)','font-size:1.3177vw')
         potentialWinDetails.appendChild(potentialWinLabel)
         potentialWinDetails.appendChild(wrapInSpanWithLabel(potentialWinVal))
+=======
+        //calculationInfo.appendChild(bonusLabel)
+        calculationInfo.appendChild(bonusDetails)
+        const potentialWinDetails = returnWrapperDiv('rgb(0, 88, 0)','font-size:1.3177vw')
+        //potentialWinDetails.style = 'font-size:18px'
+        potentialWinDetails.appendChild(potentialWinLabel)
+        potentialWinDetails.appendChild(wrapInSpanWithLabel(potentialWinVal))
+        //calculationInfo.appendChild(potentialWinLabel)
+>>>>>>> b2d4bb1e8256bd219cda10cc4bf3c59c3a20a835
         calculationInfo.appendChild(potentialWinDetails)
         calculationInfo.appendChild(betButton)
         const errorMessageDiv = document.createElement('div')
@@ -496,6 +530,14 @@ export default function(parentDiv,leagueWrapper,arr,league,ratingsObj) {
             deselectOdd(elm)
             reCalculateOdds()
           }
+<<<<<<< HEAD
+=======
+/*           image.onclick = ()=>{
+            spELem.style.backgroundColor = royalBlue
+            deselectOdd(spELem)
+            reCalculateOdds()
+          } */
+>>>>>>> b2d4bb1e8256bd219cda10cc4bf3c59c3a20a835
         }
         const matchClass = obj.classList.item(1)
         const calcDiv = document.getElementById('calcContainer')
@@ -578,6 +620,10 @@ export default function(parentDiv,leagueWrapper,arr,league,ratingsObj) {
       for (let k of keys) {
         arrz.push(arr[i][k])
       }
+<<<<<<< HEAD
+=======
+      //arrz.push(one, x, two, onex, onetwo, xtwo)
+>>>>>>> b2d4bb1e8256bd219cda10cc4bf3c59c3a20a835
       display_each(arrz)
 
     }
