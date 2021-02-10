@@ -2,16 +2,12 @@ const express = require('express')
 const path = require('path')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
-const mongoose = require('mongoose')
 require('dotenv').config({path:path.join('..','..','.env')});
-
 require('dotenv').config({ debug: process.env.DEBUG })
 const ENGLISH_LEAGUES = require('../data/england')
 const SPANISH_LEAGUES = require('../data/spain')
 const ITALIAN_LEAGUES = require('../data/italy')
 const GERMAN_LEAGUES = require('../data/germany')
-const BET_TYPE_WITH_ODDS = require('../data/data')
-
 const {User,Country} = require('../model/model')
 const createEachLeague = require('../utilityFunctions/individualLeaguesRunner')
 
@@ -34,6 +30,9 @@ Router.post('/signUp', async(req,res)=>{
             return res.status(400).send({
                 error:'Invalid Input' 
             })
+        }
+        if(password.length<6){
+            return res.status(400).send({error:'Password must be atleast 6 characters long'})
         }
         
         const englishLeagues = createEachLeague('english',ENGLISH_LEAGUES)
@@ -58,18 +57,17 @@ Router.post('/signUp', async(req,res)=>{
             
            return res.json({token})
     } catch (error) {
-        String.prototype.inc
         const err = (error.errors !== undefined) && (error.errors['email'].message||error.errors['password'].message)
         if(error.message.includes('E11000 duplicate key error collection')){
             return res.status(400).send({error:'The Email You Provided Already Exists'})
-        }
+        } 
         if(err){
            return res.status(400).send({error:`${err}`})
         }
         else{
            return res.status(500).send({error:'Error In Account Creation.Enter The Proper Information Or Try Again Later'})
         }
-    }
+    } 
 })
 
 Router.post('/signIn',async (req,res)=>{

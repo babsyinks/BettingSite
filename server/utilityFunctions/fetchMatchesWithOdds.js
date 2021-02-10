@@ -20,7 +20,7 @@ const calculateOdds = require('./setOdds.js')
 
 function assignGamesWithOdds(teams){
     //ratings 5 and above high chance of high scores
-    //ratings 4 below low chance of high scores
+    //ratings 4 and below low chance of high scores
     //ratings proportional to winning chances
     //draw - 10,9 - -1,87 0, 6543 +1, 21 +2 substraction is from lowest rated team
 

@@ -95,7 +95,6 @@ export default function countryListener(div,country,isClicked) {
   
           arrVal[i].setAttribute('style', 'display:block')
   
-          //arrVal[i].classList.add('')
           let clickEventListeners = leagueListener(altColor,country,arrVal[i].id)
           listenersArray.push(clickEventListeners)
           arrVal[i].addEventListener('click',clickEventListeners)

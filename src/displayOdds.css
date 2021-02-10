@@ -56,8 +56,6 @@ img{
     box-sizing: border-box;
     user-select: none;
 }
-/* padding-left: 26px;
-padding-bottom: 24px; */
 #England div,
 #Spain div,
 #Germany div,
@@ -72,19 +70,6 @@ padding-bottom: 24px; */
 #chooser {
     width: 17.57vw;
 }
-
-/* [class$="_League"]{
-    width: 7em;
-    height: 1.2em;
-    border: inherit;
-    display: none;
-    user-select: none;
-} */
-
-/* .displayCountryLeagues{
-    display: block;
-    border:1px solid grey
-} */
 
 [class$="_League"]{
     border:1px solid rgb(221, 221, 221);

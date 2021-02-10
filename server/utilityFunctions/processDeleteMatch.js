@@ -1,7 +1,6 @@
 const processCountry = require('./processCountry.js')
 
 const deleteGame = (arr,matchObj)=>{
-   // arr = arr.games.filter((gameObj)=>gameObj.homeTeam === matchObj.homeTeam && gameObj.awayTeam === matchObj.awayTeam)
   const index = arr.games.findIndex((gameObj)=>gameObj.homeTeam === matchObj.homeTeam && gameObj.awayTeam === matchObj.awayTeam)
   if(index !== -1){
     arr.games.splice(index,1)

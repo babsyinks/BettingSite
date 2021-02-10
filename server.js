@@ -6,9 +6,9 @@ const accessRoutes = require('./server/routes/authRoutes')
 const betRoutes = require('./server/routes/betRoutes')
 const generalRoutes = require('./server/routes/generalRoutes')
 const displayBetsRoutes = require('./server/routes/displayBetsRoutes')
+const port = process.env.PORT||3000
 require('./server/db/db')
 
-app.set('view engine','ejs')
 app.use(cookieParser())
 app.use(express.static(path.resolve(__dirname,'client')))
 
@@ -21,6 +21,6 @@ app.use((err,req,res,next)=>{
     res.status(500).send({message:err.message})
 })
   
-app.listen(3000,()=>{
+app.listen(port,()=>{
     console.log('Listening on port 3000')
 })
