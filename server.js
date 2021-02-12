@@ -11,7 +11,7 @@ require('./server/db/db')
 
 app.use(cookieParser())
 app.use(express.static(path.resolve(__dirname,'client')))
-
+app.use('/images',express.static(path.resolve(__dirname,'..','..','client','images')))
 app.use('/access',accessRoutes)
 app.use('/bets',betRoutes) 
 app.use('/display',displayBetsRoutes)
