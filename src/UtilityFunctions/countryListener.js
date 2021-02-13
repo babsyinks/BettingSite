@@ -29,7 +29,7 @@ import {reCalculateOdds} from './calculateOdds.js'
             disp.appendChild(heading)
             const img = document.createElement('img')
             img.id = 'betChamp'
-            img.src = '/images/betChamp.jpg'
+            img.src = '../../Images/betChamp.jpg'
             disp.appendChild(img)
           }
 
@@ -40,7 +40,7 @@ import {reCalculateOdds} from './calculateOdds.js'
             const appendBaller = ()=>{
               const baller = document.createElement('img')
               baller.id = 'baller'
-              baller.src = '/images/baller.jpg'
+              baller.src = '../../Images/baller.jpg'
               calculateDiv.appendChild(baller)
             }
 
