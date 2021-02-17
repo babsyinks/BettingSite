@@ -6,6 +6,9 @@ body{
 img{
     display: inline-block;
 }
+button,input[type="button"],input[type="submit"]{
+    cursor: pointer;
+}
 #heading{
     display: grid;
     grid-template-columns: 1fr 9fr 1fr;
@@ -319,11 +322,11 @@ border:1px solid rgb(201, 194, 194);
     font-size: 1.171vw;
     padding:  0.366vw;
     display: none;
+    margin-top: 10px;
 }
 
 /* this section deals with info modal */
-.wrapper{
-    position: relative;   
+.wrapper{ 
     width: 100%;
     overflow-x: hidden;
 }
@@ -395,7 +398,7 @@ border:1px solid rgb(201, 194, 194);
 }
 
 .modal>.butDiv{
-    height: 20vh;
+    padding:1.464vw 0.366vw;
     overflow-y: hidden;
     display: flex;
     justify-content: center;
