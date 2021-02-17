@@ -14,6 +14,15 @@ const {
       
 const calculateOdds = (ratingsDifference,homerating,awayrating)=>{
 
+    const sanitizeInputs = (inpObj)=>{
+        for (const v of Object.keys(inpObj)) {
+            if(+inpObj[v] === 1){
+                inpObj[v] = '1.01'
+            }
+        }
+        return inpObj
+    }
+
     const getRandomDecimal = ()=>{
         return (Math.floor(Math.random()*100))/100
     }
@@ -85,7 +94,7 @@ const calculateOdds = (ratingsDifference,homerating,awayrating)=>{
         decimal = getDecimalVal(decimal,randomBool())
         oddsObj.onetwo = (wholeNumber + decimal).toFixed(2)
 
-        return oddsObj
+        return sanitizeInputs(oddsObj) 
     }
 
     const setOverUnderOdds = (highGoalsWholeNum,highGoalsArr,lowGoalsWholeNum,lowGoalsArr,oddsObject,isGGNG)=>{
@@ -145,7 +154,7 @@ const calculateOdds = (ratingsDifference,homerating,awayrating)=>{
 
         }
 
-        return oddsObj
+        return sanitizeInputs(oddsObj) 
     }
 
     const getOverOrUnderForHomeOrAway = (hmRating,awRating,oddsObj,paramsObj)=>{
@@ -186,7 +195,7 @@ const calculateOdds = (ratingsDifference,homerating,awayrating)=>{
             setOverUnderOdds(paramsObj.nine.hg,paramsObj.nine.hga,paramsObj.nine.lg,paramsObj.nine.lga,oddsObj)
         }
 
-        return oddsObj
+        return sanitizeInputs(oddsObj) 
     }
 
     const getWinEitherOrWinBoth = (homeDefaultNum,awayDefaultNum)=>{
@@ -204,7 +213,7 @@ const calculateOdds = (ratingsDifference,homerating,awayrating)=>{
         decimal = getDecimalVal(decimal,false)
         oddsObj.two = (defaultNumber + decimal).toFixed(2)
 
-        return oddsObj
+        return sanitizeInputs(oddsObj) 
     }
 
     const getPenaltyOdds = ()=>({
@@ -219,6 +228,7 @@ const calculateOdds = (ratingsDifference,homerating,awayrating)=>{
 
     const getOdds = (mainVals,winEitherVals,winBothVals)=>{
         const main = getMainOdds(...mainVals)
+
         const gg = getOverUnderOdds(homerating,awayrating,{},ggParamsObj,true)
         const ou1p5 = getOverUnderOdds(homerating,awayrating,{},ou1p5ParamsObj)
         const ou2p5 = getOverUnderOdds(homerating,awayrating,{},ou2p5ParamsObj)
