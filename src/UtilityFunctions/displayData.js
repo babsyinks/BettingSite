@@ -428,6 +428,27 @@ export default function(parentDiv,leagueWrapper,arr,league,ratingsObj) {
       }
     }
 
+    function checkMaxAllowableWin(){
+      let potWin = document.getElementById('potentialWinVal')
+      const errorDiv = document.getElementById('error')
+      const betButton = document.getElementById('betButton')
+      if(potWin && errorDiv){
+          const potWinNum = +potWin.textContent.split(',').reduce((acc,val)=>acc+val,'')
+          
+          if(potWinNum>1000000000){
+            errorDiv.style= 'display:block'
+            errorDiv.textContent = 'Maximum winnable amount is $1000,000,000'
+            betButton.disabled = true
+            return true
+          }
+          else{
+            errorDiv.style ='display:none'
+            errorDiv.textContent = ''
+            betButton.disabled = false
+          }
+      }
+    }
+
     function deselectOdd(spElem){
       //pick second class. it is of form 'arsenalvschelsea'
       const matchClass = spElem.classList.item(1)
@@ -446,17 +467,15 @@ export default function(parentDiv,leagueWrapper,arr,league,ratingsObj) {
         msgDiv.id = 'msgDiv'
         calculateDiv.appendChild(msgDiv)
       }
-      const errorDiv = document.getElementById('error')
-      errorDiv.textContent = ''
-      errorDiv.style = 'display:none'
+
+      if(checkMaxAllowableWin()){
+        return
+      }
+      
 
     }
     //event handler for each odd
     function handleValClicks(obj) {
-
-      if(obj.textContent === ''|| Array.from(document.getElementsByClassName('selectedMatches')).length === 30){
-        return
-      }
       //this handles an odd holding span element that has been selected already,so it deselects it 
       if (obj.style.backgroundColor === purple) {
         obj.style.backgroundColor = royalBlue
@@ -465,23 +484,20 @@ export default function(parentDiv,leagueWrapper,arr,league,ratingsObj) {
       }
       //this does the opposite of the above
        else {
-        let potWin = document.getElementById('potentialWinVal')
-        const errorDiv = document.getElementById('error')
-
-        if(potWin && errorDiv){
-            const potWinNum = +potWin.textContent.split(',').reduce((acc,val)=>acc+val,'')
-            
-            if(potWinNum>1000000000){
+         if(obj.textContent === ''){
+            return
+         }
+         else if(Array.from(document.getElementsByClassName('selectedMatches')).length === 30){
+          const errorDiv = document.getElementById('error')
+          if(errorDiv){
               errorDiv.style= 'display:block'
-              errorDiv.textContent = 'Maximum winnable amount is $1000,000,000'
-              return
-            }
-            else{
-              errorDiv.style ='display:none'
-              errorDiv.textContent = ''
-            }
-        }
-        
+              errorDiv.textContent = 'You are not allowed to select more than 30 matches'
+          }
+          return
+         }
+        if(checkMaxAllowableWin()){
+          return
+        } 
         obj.id = 'current'
         obj.setAttribute('style', `background-color:${purple}`)
         let myMatchArr = arr.map((matchObj)=>{

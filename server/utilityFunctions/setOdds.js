@@ -24,7 +24,6 @@ const calculateOdds = (ratingsDifference,homerating,awayrating)=>{
         if(ratingsDifference<=-5 || ratingsDifference === 2 || ratingsDifference === 3){
             greater = !greater
         }
-
             if(greater){
                 if(decimalNum>0.51){
                 dec = decimalNum-=0.50
@@ -36,8 +35,6 @@ const calculateOdds = (ratingsDifference,homerating,awayrating)=>{
                     dec = decimalNum+=0.50
                 }
             }
-        
-
         return dec
     }
 
@@ -53,7 +50,6 @@ const calculateOdds = (ratingsDifference,homerating,awayrating)=>{
         const secondVal = arr2[getRandIndex(arr2)]
         const total = (firstVal+secondVal)/10
         return total
-
     }
     
     const getMainOdds = (homeWholeNum,awayWholeNum,drawWholeNum,doubleChanceWholeNumBoth)=>{
