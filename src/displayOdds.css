@@ -530,9 +530,12 @@ border:1px solid rgb(201, 194, 194);
 @media only screen and (orientation:portrait){
 .vals,.matchSpan,.options,.match{
     height: 2.327vh;
-}
+    font-size: 1.5vw;
+}   
 .style_divs{
     height: 3vh;
+    font-family: cursive;
+    font-size: 1.5vw;
 }
 .display_league{
     height: auto;
@@ -550,6 +553,13 @@ border:1px solid rgb(201, 194, 194);
 
 .matchSpan {
     font-size: 1.171vw;
+}
+
+.matchSpan {
+    font-size: 1.5vw;
+}
+#England, #Spain, #Germany, #Italy{
+    font-size: 1.5vw;
 }
 
 }
@@ -575,9 +585,20 @@ border:1px solid rgb(201, 194, 194);
         width: 9.37vw;
         height: 0.2vh;
     }
-
+    .matchSpan {
+        font-size: 1.5vw;
+    }
+    #England, #Spain, #Germany, #Italy{
+        font-size: 1.5vw;
+    }
+    .style_divs {
+        font-family: cursive;
+        font-size: 1.5vw;
+    }
+    .match,.options,.vals{
+        font-size: 1.5vw;
+    }
 }
-
 
 @media only screen and (max-width:330px){  
     #betChampHeader{ 
