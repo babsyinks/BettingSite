@@ -52,7 +52,7 @@ button,input[type="button"],input[type="submit"]{
     color: white;
     border-radius: 2px;
     text-align: left;
-    font-family: cursive;
+    font-family: 'Roboto', sans-serif;
     font-size: 1.171vw;
     font-weight: bold;
     padding: 10px 5px;
@@ -161,7 +161,7 @@ div {
     background-color: royalblue;
     color: white;
     border-radius: 2px;
-    font-family: cursive;
+    font-family: 'Roboto', sans-serif;
     font-size: 1.054vw;
     font-weight: bold;
     height: 7.61vh;
@@ -176,7 +176,7 @@ div {
     background-color: rgb(3, 38, 143);
     color: white;
     border-radius: 2px;
-    font-family: cursive;
+    font-family: 'Roboto', sans-serif;
     font-size: 1.054vw;
     font-weight: bold;
     margin: 0.76vh 0px 0.76vh 0.366vw;
@@ -193,7 +193,7 @@ div {
     color: white;
     border-radius: 2px;
     padding-left:2px;
-    font-family: cursive;
+    font-family: 'Roboto', sans-serif;
     font-size: 1.0542vw;
     font-weight: bold;
     height: 5.327vh;
@@ -239,7 +239,7 @@ div {
     background-color: cornflowerblue;
     color: black;
     border-radius: 2px;
-    font-family: cursive;
+    font-family: 'Roboto', sans-serif;
     font-size:  1.054vw;
     font-weight: bold;
     height:5.327vh;
@@ -258,7 +258,7 @@ div {
     color: black;
     border-radius: 2px;
     text-align: center;
-    font-family: cursive;
+    font-family: 'Roboto', sans-serif;
     font-size: 1.054vw;
     font-weight: bold;
     margin: 0.76vh 0px 0.76vh 0.366vw;
@@ -531,11 +531,9 @@ border:1px solid rgb(201, 194, 194);
 .vals,.matchSpan,.options,.match{
     height: 2.327vh;
     font-size: 1.5vw;
-    font-family: 'Roboto', sans-serif;
 }   
 .style_divs{
     height: 3vh;
-    font-family: 'Roboto', sans-serif;;
     font-size: 1.5vw;
 }
 .display_league{
@@ -561,7 +559,6 @@ border:1px solid rgb(201, 194, 194);
 }
 #England, #Spain, #Germany, #Italy{
     font-size: 1.5vw;
-    font-family: 'Roboto', sans-serif;
 }
 
 }
@@ -589,19 +586,15 @@ border:1px solid rgb(201, 194, 194);
     }
     .matchSpan {
         font-size: 1.5vw;
-        font-family: 'Roboto', sans-serif;
     }
     #England, #Spain, #Germany, #Italy{
         font-size: 1.5vw;
-        font-family: 'Roboto', sans-serif;
     }
     .style_divs {
-        font-family: 'Roboto', sans-serif;
         font-size: 1.5vw;
     }
     .match,.options,.vals{
         font-size: 1.5vw;
-        font-family: 'Roboto', sans-serif;
     }
 }
 
