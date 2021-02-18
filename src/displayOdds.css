@@ -531,10 +531,11 @@ border:1px solid rgb(201, 194, 194);
 .vals,.matchSpan,.options,.match{
     height: 2.327vh;
     font-size: 1.5vw;
+    font-family: 'Roboto', sans-serif;
 }   
 .style_divs{
     height: 3vh;
-    font-family: cursive;
+    font-family: 'Roboto', sans-serif;;
     font-size: 1.5vw;
 }
 .display_league{
@@ -560,6 +561,7 @@ border:1px solid rgb(201, 194, 194);
 }
 #England, #Spain, #Germany, #Italy{
     font-size: 1.5vw;
+    font-family: 'Roboto', sans-serif;
 }
 
 }
@@ -587,16 +589,19 @@ border:1px solid rgb(201, 194, 194);
     }
     .matchSpan {
         font-size: 1.5vw;
+        font-family: 'Roboto', sans-serif;
     }
     #England, #Spain, #Germany, #Italy{
         font-size: 1.5vw;
+        font-family: 'Roboto', sans-serif;
     }
     .style_divs {
-        font-family: cursive;
+        font-family: 'Roboto', sans-serif;
         font-size: 1.5vw;
     }
     .match,.options,.vals{
         font-size: 1.5vw;
+        font-family: 'Roboto', sans-serif;
     }
 }
 
