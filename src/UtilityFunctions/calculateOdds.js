@@ -1,5 +1,5 @@
 import toCurrency from './displayInCurrencyFormat.js'
-//this calaculates the bonus that will added to the bet amount
+//this calculates the bonus that will added to the bet amount
     export function calculateBonus(oddsTotal,numOfMatches,amount){
         let bonus
         amount = +amount
