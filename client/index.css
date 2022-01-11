@@ -1,0 +1,362 @@
+body{
+    font-family: 'Montserrat', sans-serif;
+}
+
+nav{
+    display: flex;
+    justify-content: flex-end;
+}
+
+button{
+    cursor: pointer;
+}
+
+a{
+    text-decoration: none;
+}
+
+nav a,nav button{
+    padding: 0.4vh 0.73vw;
+    font-size: 1.218vw;
+    cursor: pointer;
+    margin:0px  0.366vw;
+    background-color: rgb(24, 23, 23);
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+}
+.logoHome{
+ display: flex;
+ justify-content: space-between;   
+ align-items: center;
+ height: 15%;
+}
+
+.logoHome > img{
+    border-radius: 10%;
+}
+
+.logoHome  div{
+    background-color: #04026b;
+    color: white;
+    border: 1px solid rgb(138, 111, 111);
+    height: fit-content;
+    padding: 8px;
+    border-radius: 5px;
+    font-weight: bold;
+    outline: none;
+    font-family: 'Nunito', sans-serif;
+    cursor: pointer;
+}
+
+.logoHome > div:hover{
+    background-color: #131188;
+}
+.ballHome{
+    height: 90%;
+    background-image: radial-gradient(circle, #04026b 0%, #1d77ff 100%);
+    background-repeat: no-repeat;
+}
+
+@media only screen and (min-height:1000px){
+    .logoHome{
+        font-size: 2.5vh;
+    }
+    .logoHome>img{
+        width: 10vh;
+        height: 10vh;
+    }
+
+
+}
+
+.ballHome > img{
+    width: 30vw;
+    height: 70vh;
+}
+
+@media only screen and (orientation:portrait){
+    .ballHome > img{
+        width: 90vw;
+        height: 70vh;
+    }
+}
+
+.signHome{
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+/* .signHome a{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+} */
+
+.sign_up, .sign_in{
+    width: 40%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    border: 1px solid rgb(26, 24, 24);
+    margin-top: 10px;
+    outline:none;
+    border-radius: 5px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+}
+@media only screen and (max-width:600px) {
+    .signHome{
+        width:80%;
+    }  
+}
+@media only screen and (max-width:300px) {
+    .signHome{
+        width:85%;
+    }  
+    .sign_up, .sign_in{
+        width:35%;
+    }
+}
+.sign_in{
+    color: black;
+}
+.sign_up,.sign_in:hover{
+    background-color: black;
+    color: white;
+}
+.sign_up:hover{
+    background-color:unset;
+    color: black;
+}
+.wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1.464vw;
+    font-size: 1.757vw;
+    padding-top: 0px;
+}
+
+.wrapper>h1{
+    margin: 0px;
+    font-size: 3.51vw;
+    padding-bottom: 1.464vw;
+    color:rgb(24, 23, 23);
+}
+
+.cover2 p{
+    font-size: 1.757vw;
+    margin:0px;
+    line-height: 3.66vw;
+    color:rgb(68, 60, 60)
+}
+
+.homeCover{
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(36.6vw, 1fr));
+    gap:2.196vw;
+    grid-template-rows: auto;
+}
+
+.cover1 img{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+.accessButtons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 2vw;
+}
+
+.accessButtons a{
+    margin-bottom: 2.196vw;
+}
+
+.accessButtons a button{
+    padding: 0.742vw;
+    font-weight: bold;
+    width: 29.28vw;
+    font-size: 0.976vw;
+    background-color: rgb(114, 230, 38);
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.accessButtons a button:hover{
+    color: rgb(75, 187, 0);
+    background-color: white;
+    border:1px solid rgb(102, 255, 0);
+
+}
+
+@media only screen and (orientation:portrait){
+    .homeCover{
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    nav a{
+        padding: 1vh 2vw;
+        font-size: 3vw;
+        margin:0px  1vw;
+    }
+
+    .wrapper{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 3vw;
+        font-size: 3.5vw;
+    }
+    
+    .wrapper>h1{
+        margin: 0px;
+        font-size: 6vw;
+        padding-bottom: 3vw;
+    }
+    
+    .cover2 p{
+        font-size: 3.5vw;
+        margin:0px;
+        line-height: 7vw;
+    }
+
+    .accessButtons{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 6vw;
+    }
+    
+    .accessButtons a{
+        margin-bottom: 2.5vw;
+    }
+    
+    .accessButtons a button{
+        padding: 1.5vw;
+        font-weight: bold;
+        width: 60vw;
+        font-size: 2vw;
+        background-color: rgb(114, 230, 38);
+        outline: none;
+        border: none;
+        cursor: pointer;
+    }
+
+
+}   
+
+    button.oddsBtn{
+        padding: 0.732vw;
+        color: white;
+        background-color:rgb(24, 23, 23);
+        outline: none;
+        border: none;
+        font-weight: bold;
+        margin-bottom: 10px;
+        font-size: 0.976vw;
+    }
+
+    button.oddsBtn:hover{
+        padding: 0.732vw;
+        color: rgb(24, 23, 23);
+        background-color:white;
+        outline: none;
+        border: none;
+        font-weight: bold;
+        border:1px solid rgb(24, 23, 23)
+    }  
+    
+    .regWrapper{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 90vh;
+    }
+
+    .regWrapper>h1{
+        font-size:  1.757vw;
+        margin:0px;
+    }
+
+    .regWrapper>p{
+        font-size:  1.171vw;
+    }
+
+    .regWrapper>input{
+        padding: 0.732vw;
+        font-size: 1.171vw;
+        color: rgb(26, 189, 4);
+        background-color: white;
+        font-weight: bold;
+        border: 1px solid rgb(26, 189, 4);
+        outline: none;
+    }
+
+    .regWrapper>input:hover{
+        padding: 0.732vw;
+        font-size: 1.171vw;
+        color: rgb(14, 124, 0);
+        border: 1px solid rgb(14, 124, 0);
+        cursor: pointer;
+    }
+
+    @media only screen and (orientation:portrait){
+        
+    .ctrBtns{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-direction: column;
+    } 
+
+    button.oddsBtn{
+        padding: 0.732vh;
+        color: white;
+        background-color:rgb(24, 23, 23);
+        outline: none;
+        border: none;
+        font-weight: bold;
+        margin-bottom: 10px;
+        font-size: 0.976vh;
+    }
+    .wrapper>h1 {
+        font-size: 3.5vh;
+    }
+    nav a, nav button {
+        font-size: 1.218vh;
+    }
+
+    .regWrapper>h1{
+        font-size:  1.757vh;
+    }
+
+    .regWrapper>p{
+        font-size:  1.171vh;
+    }
+
+    .regWrapper>input{
+        padding: 0.732vh;
+        font-size: 1.171vh;
+    }
+
+    .regWrapper>input:hover{
+        padding: 0.732vh;
+        font-size: 1.171vh;
+    }
+
+    }
+

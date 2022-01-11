@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="module" src="displayOdds.js"></script>
+    <script type="text/javascript" src="signOut.js"></script>
+    <link rel="stylesheet" href="displayOdds.css" type="text/css">
+    <link rel="icon" href="../Images/logo16.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>BetChampion</title>
+</head>
+
+<body>
+    <div class="wrapper">
+    <div id="heading">
+        <img src="../Images/logo.png"/><span>Ready To Bet For Fun?Lets Go...</span><div><p class="logout" onclick="signOut()">Sign Out</p></div>
+    </div>
+    <div id="myGrid">
+        <div id="chooser">
+            <div id="England">England
+                <div id="epl" class="England_League">
+                    <span>Premier League</span> 
+                </div>
+                <div id="championship" class="England_League">
+                    <span>Championship</span> 
+                </div>
+                <div id="league1" class="England_League">
+                    <span>League1</span> 
+                </div>
+                <div id="league2" class="England_League">
+                    <span>League2</span> 
+                </div>
+            </div>
+
+            <div id="Spain">Spain
+                <div id="laliga" class="Spain_League">
+                    <span>La Liga</span>
+                </div>
+                <div id="laliga2" class="Spain_League">
+                    <span>La Liga2</span>
+                </div>
+                <div id="segundab" class="Spain_League">
+                    <span>Segunda B</span>
+                </div>
+            </div>
+
+            <div id="Germany">Germany
+                <div id="1.bundesliga" class="Germany_League">
+                    <span>1.Bundesliga</span>
+                </div>
+                <div id="2.bundesliga" class="Germany_League">
+                    <span>2.Bundesliga</span>
+                </div>
+                <div id="3.liga" class="Germany_League">
+                    <span>3.liga</span>
+                </div>
+            </div>
+
+
+            <div id="Italy">Italy
+                <div id="seriea" class="Italy_League">
+                    <span>Serie A</span>
+                </div>
+                <div id="serieb" class="Italy_League">
+                    <span>Serie B</span>
+                </div>
+                <div id="seriec" class="Italy_League">
+                    <span>Serie C</span> 
+                </div>
+            </div>
+        </div>
+        <div id="display">
+            <div id = "dispContainer" >
+                <h2 id="betChampHeader">Select a country from any menu on the left,then choose a league</h2>
+                <img src="../Images/betChamp.jpg" id="betChamp"/> 
+            </div>
+        </div>
+
+        <div id="calculate">
+            <div id="calcContainer" >
+                <img src="../Images/baller.jpg" id="baller"/>
+            </div>
+            
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
