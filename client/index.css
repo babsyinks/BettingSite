@@ -36,6 +36,12 @@ nav a,nav button{
     border-radius: 10%;
 }
 
+.logoHome > h1{
+    color: rgb(216, 216, 216);
+    font-family: 'Playball', cursive;
+    font-size: 2.5vw;
+}
+
 .logoHome  div{
     background-color: #04026b;
     color: white;
@@ -80,6 +86,9 @@ nav a,nav button{
         width: 90vw;
         height: 70vh;
     }
+    .logoHome > h1{
+        font-size: 5.25vw;
+    }
 }
 
 .signHome{
@@ -110,6 +119,15 @@ nav a,nav button{
     .signHome{
         width:80%;
     }  
+}
+@media only screen and (max-width:450px) {
+    .logoHome > h1{
+        padding: 0px 5px;
+        text-align: center;
+    }
+    .logoHome > a div{
+        text-align: center;
+    }
 }
 @media only screen and (max-width:300px) {
     .signHome{
