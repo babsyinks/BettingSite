@@ -15,12 +15,12 @@ Router.get('/bet',auth,(req,res)=>{
     res.sendFile(path.resolve(assetsPath,'displayOdds.html'))
 })
 
-Router.get('/home',auth,(req,res)=>{
+/* Router.get('/home',auth,(req,res)=>{
     res.sendFile(path.resolve(assetsPath,'home.html'))
-})
+}) */
 
-Router.get('/registrationSuccess',auth,(req,res)=>{
+/* Router.get('/registrationSuccess',auth,(req,res)=>{
     res.sendFile(path.resolve(__dirname,'..','..','client','access','registrationSuccess.html'))
-}) 
+})  */
 
 module.exports = Router

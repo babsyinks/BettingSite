@@ -1,3 +1,3 @@
-const proceedToBet = async ()=>{
-  window.location = '/home'
+const proceedToBet =  ()=>{
+  window.location.href = '/home.html'
 }    

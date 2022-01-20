@@ -21,7 +21,7 @@ const signUp = async ()=>{
         throw new Error(data.error)
     }
       localStorage.setItem('token',data.token) 
-      window.location = '/registrationSuccess' 
+      window.location.href = 'registrationSuccess.html' 
     
     } catch (error) {
         if(error.message){

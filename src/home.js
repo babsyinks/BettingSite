@@ -8,29 +8,28 @@ const getRoute = async (route,location)=>{
 
     try {
         const response = await fetch(route,{
-        method:'get',
         headers:{
-            'X-Auth-Token':localStorage.getItem('token'),
             'Accept':'application/json',
-            'Content-Type':'application/json'
+            'Content-Type':'application/json',
+            'X-Auth-Token':localStorage.getItem('token')
         }
     })
 
     const data = await response.json()
-    if(data.message === 'Welcome'){
-        window.location = location 
-    }  
+        if(data.message === 'Welcome'){
+            window.location.href = location
+        } 
     } catch (error) {
         console.log(error.message)
     }
 }
  
 const setOdds = ()=>{
-    getRoute('/bets/setOdds','admin')
+    getRoute('/bets/setOdds','admin.html')
 }
 
 const placeBets = ()=>{
-    getRoute('/display/placeBets','bet')
+    getRoute('/display/placeBets','displayOdds.html')
 } 
 
 

@@ -7,8 +7,7 @@ const signIn = async ()=>{
         method:'post',
         headers:{
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
-            
+            'Content-Type': 'application/json' 
     },
         body:JSON.stringify({
         email,
@@ -20,7 +19,7 @@ const signIn = async ()=>{
         throw new Error(data.error)
     }
     localStorage.setItem('token',data.token)
-    window.location = '/home'
+    window.location.href = '/home.html'
     } catch (error) {
         if(error.message){
             document.getElementsByClassName('error_SignIn')[0].textContent = error.message

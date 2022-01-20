@@ -1,0 +1,85 @@
+body{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1.464vw;
+    font-size: 1.757vw;
+    padding-top: 0px;
+}
+
+.wrapper>h1{
+    margin: 0px;
+    font-size: 3.51vw;
+    padding-bottom: 1.464vw;
+    color:rgb(24, 23, 23);
+}
+
+button.oddsBtn{
+    padding: 0.732vw;
+    color: white;
+    background-color:rgb(24, 23, 23);
+    outline: none;
+    border: none;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 0.976vw;
+}
+
+button.oddsBtn:hover{
+    padding: 0.732vw;
+    color: rgb(24, 23, 23);
+    background-color:white;
+    outline: none;
+    border: none;
+    font-weight: bold;
+    border:1px solid rgb(24, 23, 23);
+    cursor: pointer;
+}  
+
+nav{
+    display: flex;
+    justify-content: flex-end;
+}
+
+nav a,nav button{
+    padding: 0.4vh 0.73vw;
+    font-size: 1.218vw;
+    cursor: pointer;
+    margin:0px  0.366vw;
+    background-color: rgb(24, 23, 23);
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+}
+@media only screen and (orientation:portrait){
+    
+.ctrBtns{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+} 
+
+button.oddsBtn{
+    padding: 0.732vh;
+    color: white;
+    background-color:rgb(24, 23, 23);
+    outline: none;
+    border: none;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 0.976vh;
+}
+.wrapper>h1 {
+    font-size: 3.5vh;
+}
+
+nav a, nav button {
+    font-size: 1.218vh;
+}
+}
