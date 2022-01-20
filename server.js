@@ -9,8 +9,6 @@ const displayBetsRoutes = require('./server/routes/displayBetsRoutes')
 const port = process.env.PORT||3000
 require('./server/db/db')
 
-/* app.use(cookieParser()) */
-
 app.use(express.static(path.resolve(__dirname,'client')))
 app.use('/images',express.static(path.resolve(__dirname,'..','..','client','images')))
 app.use('/access',accessRoutes)

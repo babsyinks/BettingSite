@@ -5,8 +5,7 @@ require('dotenv').config({path:path.join('..','..','.env')});
 require('dotenv').config({ debug: process.env.DEBUG })
 const auth = async (req,res,next)=>{
     try {
-    const token = req.headers['x-auth-token'] /* || req.cookies.token */
-    //{user:{id:newUser.id}}
+    const token = req.headers['x-auth-token']
     const verifyObj = jwt.verify(token,process.env.TOKEN_SECRET)
     const user = await User.findById(verifyObj.user.id)
 

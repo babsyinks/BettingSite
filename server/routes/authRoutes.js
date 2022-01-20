@@ -52,8 +52,6 @@ Router.post('/signUp', async(req,res)=>{
         await newUser.save()
         
         const token = jwt.sign({user:{id:newUser.id}},process.env.TOKEN_SECRET,{expiresIn:24*60*60*1000})
-
-            /* res.cookie('token',token,{httpOnly:true,expires:new Date(Date.now() + 24*60*60*1000)}) */
             
            return res.json({token})
     } catch (error) {
@@ -89,7 +87,6 @@ Router.post('/signIn',async (req,res)=>{
     }
 
     const token = jwt.sign({user:{id:user.id}},process.env.TOKEN_SECRET,{expiresIn:24*60*60*1000})
-    /* res.cookie('token',token,{httpOnly:true,expires:new Date(Date.now() + 24*60*60*1000)}) */
     res.json({token})
     } catch (error) {
         res.status(404).send({error:'Sign in failed.'})
@@ -97,7 +94,6 @@ Router.post('/signIn',async (req,res)=>{
 })
 
 Router.get('/signOut',(req,res)=>{
-    /* res.cookie('token',{expires:Date.now()}) */
     res.send({logout:true})
 })
 
